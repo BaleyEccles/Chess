@@ -10,6 +10,9 @@ class Peices
 public:
 	Peices(glm::vec2 Location, std::string colour, std::string PeiceType);
 
+	bool HasMoved = true; 
+
+
 	glm::vec2 position;
 
 	glm::vec2 Game_Pos;
@@ -18,7 +21,10 @@ public:
 
 	std::string Colour;
 
+	std::vector<glm::vec2> AvailableMoves;
+	
 	bool IsDead = false;
+
 
 	virtual bool IsOutOfBoard(glm::vec2 Pos);
 
@@ -36,15 +42,21 @@ public:
 
 	virtual void Render();
 
+	virtual std::vector<glm::vec2> RemoveSamePeice(std::vector<glm::vec2> Moves);
+
 	virtual void SetPosToCell();
 
 	virtual bool CheckMove(glm::vec2 Pos);
+
+	virtual bool CheckPosIsOccupied(glm::vec2 Pos);
 
 	virtual void CheckTakePeice();
 
 	virtual std::vector<glm::vec2> GetAvalibleMoves();
 
-	virtual std::vector<glm::vec2> RemoveSamePeice(std::vector<glm::vec2> Moves);
+
+	virtual void UpdateAvailableMoves();
+
 
 	std::vector<Peices*> PeiceVecMain;
 
@@ -53,4 +65,8 @@ public:
 	HWND hwnd;
 
 	POINT MousePos;
+
+	bool CanGo = true;
+
+
 };

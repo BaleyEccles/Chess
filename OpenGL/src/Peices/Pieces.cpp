@@ -90,7 +90,7 @@ void Peices::SetPosToMouse()
 {
     position.x = (MousePos.x / (Windowx / 8.0f)) - (Windowx / 16.0f) / (Windowx / 8.0f);
     position.y = (MousePos.y / (Windowy / 8.0f)) - (Windowy / 16.0f) / (Windowy / 8.0f);
-    //std::cout << position.x << "  " << position.y << std::endl;
+    //std::cout << Windowx << std::endl;
 }
 
 void Peices::Main(std::vector<Peices*> PeiceVec)
@@ -103,18 +103,29 @@ void Peices::Main(std::vector<Peices*> PeiceVec)
     }
 }
 
+
+void Peices::UpdateAvailableMoves()
+{
+    AvailableMoves = GetAvalibleMoves();
+    AvailableMoves = RemoveSamePeice(AvailableMoves);
+}
+
+
+
 void Peices::Location()
 {
     GetMousePos();
     GetPosScreen();
-
-    if (CheckMouseCollison())
+    if (CanGo)
     {
-        SetPosToMouse();
-    }
-    if (!CheckMouseCollison())
-    {
-        SetPosToCell();
+        if (CheckMouseCollison())
+        {
+            SetPosToMouse();
+        }
+        if (!CheckMouseCollison())
+        {
+            SetPosToCell();
+        }
     }
 }
 
@@ -123,12 +134,15 @@ void Peices::Render()
     Peice.Render(position.x, position.y);
 }
 
+
+
 void Peices::SetPosToCell()
 {
     if (CheckMove(floor(position)))
     {
         position = floor(position); // add a func that highlights the cell its going into
         Game_Pos = position;
+        HasMoved = true;
         CheckTakePeice();
     }
     if (!CheckMove(floor(position)))
@@ -139,9 +153,7 @@ void Peices::SetPosToCell()
 
 bool Peices::CheckMove(glm::vec2 Pos)
 {
-    std::vector<glm::vec2> AvailableMoves;
-    AvailableMoves = GetAvalibleMoves();
-    AvailableMoves = RemoveSamePeice(AvailableMoves);
+
     if (IsOutOfBoard(Pos))
     {
         return false;
@@ -149,6 +161,18 @@ bool Peices::CheckMove(glm::vec2 Pos)
     for (int i = 0; i < AvailableMoves.size(); i++)
     {
         if (AvailableMoves[i] == Pos)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+bool Peices::CheckPosIsOccupied(glm::vec2 Pos)
+{
+    for (int i = 0; i < PeiceVecMain.size(); i++)
+    {
+        if (PeiceVecMain[i]->Game_Pos == Pos)
         {
             return true;
         }

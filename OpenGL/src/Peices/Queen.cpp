@@ -27,22 +27,139 @@ Queen::Queen(glm::vec2 Location, std::string colour)
 
 std::vector<glm::vec2> Queen::GetAvalibleMoves()
 {
+    bool FirstPos = true;
     std::vector<glm::vec2> Moves;
     // horizontal
-    for (int k = -10; k < 10; k++)
+    FirstPos = true;
+    for (int k = 1; k < 10; k++)
     {
-        Moves.push_back(glm::vec2(Game_Pos.x, Game_Pos.y + (float)k));
+        if (CheckPosIsOccupied(glm::vec2(Game_Pos.x + (float)k, Game_Pos.y)) && FirstPos)
+        {
+            FirstPos = false;
+            Moves.push_back(glm::vec2(Game_Pos.x + (float)k, Game_Pos.y));
+        }
+        else {
+            if (FirstPos)
+            {
+                Moves.push_back(glm::vec2(Game_Pos.x + (float)k, Game_Pos.y));
+            }
+
+        }
+    }
+    FirstPos = true;
+    for (int k = -1; k > -10; k--)
+    {
+        if (CheckPosIsOccupied(glm::vec2(Game_Pos.x + (float)k, Game_Pos.y)) && FirstPos)
+        {
+            FirstPos = false;
+            Moves.push_back(glm::vec2(Game_Pos.x + (float)k, Game_Pos.y));
+
+        }
+        else {
+            if (FirstPos)
+            {
+                Moves.push_back(glm::vec2(Game_Pos.x + (float)k, Game_Pos.y));
+            }
+
+        }
     }
     // vertical
-    for (int k = -10; k < 10; k++)
+    FirstPos = true;
+    for (int k = 1; k < 10; k++)
     {
-        Moves.push_back(glm::vec2(Game_Pos.x + (float)k, Game_Pos.y));
+        if (CheckPosIsOccupied(glm::vec2(Game_Pos.x, Game_Pos.y + (float)k)) && FirstPos)
+        {
+            FirstPos = false;
+            Moves.push_back(glm::vec2(Game_Pos.x, Game_Pos.y + (float)k));
+        }
+        else {
+            if (FirstPos)
+            {
+                Moves.push_back(glm::vec2(Game_Pos.x, Game_Pos.y + (float)k));
+            }
+
+        }
     }
-    // diagonal
-    for (int k = -16; k < 16; k++)
+    FirstPos = true;
+    for (int k = -1; k > -10; k--)
     {
-        Moves.push_back(glm::vec2(Game_Pos.x + (float)k, Game_Pos.y + (float)k));
-        Moves.push_back(glm::vec2(Game_Pos.x + -(float)k, Game_Pos.y + (float)k));
+        if (CheckPosIsOccupied(glm::vec2(Game_Pos.x, Game_Pos.y + (float)k)) && FirstPos)
+        {
+            FirstPos = false;
+            Moves.push_back(glm::vec2(Game_Pos.x, Game_Pos.y + (float)k));
+        }
+        else {
+            if (FirstPos)
+            {
+                Moves.push_back(glm::vec2(Game_Pos.x, Game_Pos.y + (float)k));
+            }
+
+        }
+    }
+
+    // diagonal
+    FirstPos = true;
+    for (int k = 1; k < 16; k++)
+    {
+        if (CheckPosIsOccupied(glm::vec2(Game_Pos.x + (float)k, Game_Pos.y + (float)k)) && FirstPos)
+        {
+            FirstPos = false;
+            Moves.push_back(glm::vec2(Game_Pos.x + (float)k, Game_Pos.y + (float)k));
+        }
+        else {
+            if (FirstPos)
+            {
+                Moves.push_back(glm::vec2(Game_Pos.x + (float)k, Game_Pos.y + (float)k));
+            }
+        }
+    }
+    FirstPos = true;
+    for (int k = 1; k < 16; k++)
+    {
+        if (CheckPosIsOccupied(glm::vec2(Game_Pos.x - (float)k, Game_Pos.y + (float)k)) && FirstPos)
+        {
+            FirstPos = false;
+            Moves.push_back(glm::vec2(Game_Pos.x - (float)k, Game_Pos.y + (float)k));
+
+        }
+        else {
+            if (FirstPos)
+            {
+                Moves.push_back(glm::vec2(Game_Pos.x + -(float)k, Game_Pos.y + (float)k));
+            }
+        }
+    }
+    FirstPos = true;
+    for (int k = 1; k < 16; k++)
+    {
+        if (CheckPosIsOccupied(glm::vec2(Game_Pos.x + (float)k, Game_Pos.y - (float)k)) && FirstPos)
+        {
+            FirstPos = false;
+            Moves.push_back(glm::vec2(Game_Pos.x + (float)k, Game_Pos.y - (float)k));
+        }
+        else {
+            if (FirstPos)
+            {
+                Moves.push_back(glm::vec2(Game_Pos.x + (float)k, Game_Pos.y + -(float)k));
+            }
+        }
+    }
+    FirstPos = true;
+    for (int k = 1; k < 16; k++)
+    {
+        if (CheckPosIsOccupied(glm::vec2(Game_Pos.x - (float)k, Game_Pos.y - (float)k)) && FirstPos)
+        {
+
+            FirstPos = false;
+
+            Moves.push_back(glm::vec2(Game_Pos.x - (float)k, Game_Pos.y - (float)k));
+        }
+        else {
+            if (FirstPos)
+            {
+                Moves.push_back(glm::vec2(Game_Pos.x - (float)k, Game_Pos.y - (float)k));
+            }
+        }
     }
 
 

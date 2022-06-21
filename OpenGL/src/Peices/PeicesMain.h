@@ -37,6 +37,7 @@ public:
 	Queen(glm::vec2 Location, std::string colour);
 
 	std::vector<glm::vec2> GetAvalibleMoves() override;
+
 };
 
 class Knight : public virtual Peices
@@ -53,4 +54,7 @@ public:
 	King(glm::vec2 Location, std::string colour);
 
 	std::vector<glm::vec2> GetAvalibleMoves() override;
+
+	//std::vector<glm::vec2> RemoveInWayPeices(std::vector<glm::vec2> Moves) override;
+
 };

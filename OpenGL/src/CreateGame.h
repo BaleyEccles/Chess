@@ -19,6 +19,10 @@ public:
 
 	void Main();
 
+	std::string CurrentMove = "WHITE";
+
+	void SwapSide();
+	void RemoveDeadPeices();
 private:
 
 

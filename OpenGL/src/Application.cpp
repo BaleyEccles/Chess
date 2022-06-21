@@ -28,6 +28,12 @@
 #include "globals.cpp"
 #include "CreateGame.h"
 
+/*
+data to jSON to server to client to data to baord
+*/
+
+
+
 GLFWwindow* InitWindow()
 {
     // Initialise GLFW
@@ -138,7 +144,6 @@ int main(void)
         Peice.AddData(CubeData, Floats);*/
 
         do {
-
             //MoveWindow(hWnd_Game, 0, -25, Windowx, Windowy, TRUE);
             GLCall(glClearColor(0.0f/ 255.0f, 162.0f / 255.0f, 219.0f / 255.0f, 1.0f));
             glClearDepth(1.0f);
