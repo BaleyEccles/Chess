@@ -6,13 +6,13 @@ CreateGame::CreateGame()
 	std::vector<Pawn*> Pawns;
 	for (int i = 0; i < 16; ++i) 
 	{
-		if (i <= 8)
+		if (i < 8)
 		{
 			Pawns.push_back(new Pawn(glm::vec2((float)i, 1.0f), "WHITE"));
 		}
 		else
 		{
-			Pawns.push_back(new Pawn(glm::vec2((float)i - 9.0f, 6.0f), "BLACK"));
+			Pawns.push_back(new Pawn(glm::vec2((float)i - 8.0f, 6.0f), "BLACK"));
 		}
 	}
 	for (int i = 0; i < Pawns.size(); i++)
@@ -60,7 +60,6 @@ CreateGame::CreateGame()
 
 	King* King2 = new King(glm::vec2(3.0f, 7.0f), "BLACK");
 	Peices.push_back(King2);
-
 }
 
 void CreateGame::Main()
@@ -107,11 +106,21 @@ void CreateGame::SwapSide()
 
 void CreateGame::RemoveDeadPeices()
 {
+
 	for (int i = 0; i < Peices.size(); i++)
 	{
-		if (Peices[i]->IsDead)
+		int posdel = -1;
+		for (int i = 0; i < Peices.size(); i++)
 		{
-			//Peices.
+			if (Peices[i]->IsDead)
+			{
+				posdel = i;
+			}
+		}
+		if (posdel != -1)
+		{
+			Peices.erase(Peices.begin() + posdel);
+
 		}
 	}
 }

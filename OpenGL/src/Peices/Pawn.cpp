@@ -26,17 +26,45 @@ Pawn::Pawn(glm::vec2 Location, std::string colour)
 
 std::vector<glm::vec2> Pawn::GetAvalibleMoves()
 {
-    //std::cout << "pawn" << std::endl;
 
     std::vector<glm::vec2> Moves;
     if (Colour == "BLACK")
     {
-        Moves.push_back(glm::vec2(Game_Pos.x, Game_Pos.y - 1.0f));
-
+        if (Game_Pos.y == 6 && !CheckPosIsOccupied(glm::vec2(Game_Pos.x, Game_Pos.y - 2.0f)))
+        {
+            Moves.push_back(glm::vec2(Game_Pos.x, Game_Pos.y - 2.0f));
+        }
+        if (!CheckPosIsOccupied(glm::vec2(Game_Pos.x, Game_Pos.y - 1.0f)))
+        {
+            Moves.push_back(glm::vec2(Game_Pos.x, Game_Pos.y - 1.0f));
+        }
+        if (CheckPosIsOccupied(glm::vec2(Game_Pos.x + 1.0f, Game_Pos.y - 1.0f)))
+        {
+            Moves.push_back(glm::vec2(Game_Pos.x + 1.0f, Game_Pos.y - 1.0f));
+        }
+        if (CheckPosIsOccupied(glm::vec2(Game_Pos.x - 1.0f, Game_Pos.y - 1.0f)))
+        {
+            Moves.push_back(glm::vec2(Game_Pos.x - 1.0f, Game_Pos.y - 1.0f));
+        }
     }
     if (Colour == "WHITE")
     {
-        Moves.push_back(glm::vec2(Game_Pos.x, Game_Pos.y + 1.0f));
+        if (Game_Pos.y == 1 && !CheckPosIsOccupied(glm::vec2(Game_Pos.x, Game_Pos.y + 2.0f)))
+        {
+            Moves.push_back(glm::vec2(Game_Pos.x, Game_Pos.y + 2.0f));
+        }
+        if (!CheckPosIsOccupied(glm::vec2(Game_Pos.x, Game_Pos.y + 1.0f)))
+        {
+            Moves.push_back(glm::vec2(Game_Pos.x, Game_Pos.y + 1.0f));
+        }
+        if (CheckPosIsOccupied(glm::vec2(Game_Pos.x + 1.0f, Game_Pos.y + 1.0f)))
+        {
+            Moves.push_back(glm::vec2(Game_Pos.x + 1.0f, Game_Pos.y + 1.0f));
+        }
+        if (CheckPosIsOccupied(glm::vec2(Game_Pos.x - 1.0f, Game_Pos.y + 1.0f)))
+        {
+            Moves.push_back(glm::vec2(Game_Pos.x - 1.0f, Game_Pos.y + 1.0f));
+        }
     }
 
     return Moves;
