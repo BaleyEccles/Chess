@@ -23,6 +23,9 @@ public:
 
 	void SwapSide();
 	void RemoveDeadPeices();
+	bool CheckIfInCheck();
+
+
 private:
 
 

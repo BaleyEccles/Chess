@@ -74,8 +74,19 @@ void CreateGame::Main()
 		{
 			Peices[i]->CanGo = false;
 		}
+		if (CheckIfInCheck())
+		{
+			for (int b = 0; b < Peices.size(); b++)
+			{
+				if (Peices[b]->Type != "King" && Peices[b]->Colour == CurrentMove)
+				{
 
+					Peices[b]->CanGo = false;
+				}
+			}
+		}
 		Peices[i]->Main(Peices);
+
 		RemoveDeadPeices();
 		if (Peices[i]->HasMoved == true)
 		{
@@ -87,8 +98,56 @@ void CreateGame::Main()
 		}
 		Peices[i]->HasMoved = false;
 	}
-	
 }
+
+bool CreateGame::CheckIfInCheck()
+{
+	
+	glm::vec2 KingWPos;
+	glm::vec2 KingBPos;
+	for (int k = 0; k < Peices.size(); k++)
+	{
+		if (Peices[k]->Type == "King")
+		{
+			if (Peices[k]->Colour == "BLACK")
+			{
+				KingBPos = Peices[k]->Game_Pos;
+			}
+			else
+			{
+				KingWPos = Peices[k]->Game_Pos;
+			}
+		}
+	}
+	for (int l = 0; l < Peices.size(); l++)
+	{
+		if (Peices[l]->Type != "King" && Peices[l]->Colour == "BLACK")
+		{
+			for (int i = 0; i < Peices[l]->AvailableMoves.size(); i++)
+			{
+				if (Peices[l]->AvailableMoves[i] == KingWPos)
+				{
+					// White is in check
+					return true;
+				}
+			}
+		}
+		if (Peices[l]->Type != "King" && Peices[l]->Colour == "WHTIE")
+		{
+			for (int i = 0; i < Peices[l]->AvailableMoves.size(); i++)
+			{
+				if (Peices[l]->AvailableMoves[i] == KingBPos)
+				{
+					// Black is in check
+					return true;
+				}
+			}
+		}
+	}
+	return false;
+
+}
+
 
 void CreateGame::SwapSide()
 {

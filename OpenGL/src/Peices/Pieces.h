@@ -11,7 +11,7 @@ public:
 	Peices(glm::vec2 Location, std::string colour, std::string PeiceType);
 
 	bool HasMoved = true; 
-
+	bool IsHeld = false;
 
 	glm::vec2 position;
 
@@ -67,6 +67,7 @@ public:
 	POINT MousePos;
 
 	bool CanGo = true;
+	std::string Type;
 
 
 };

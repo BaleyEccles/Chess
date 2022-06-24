@@ -1,7 +1,7 @@
 #include "Peices\Pieces.h"
 
 Peices::Peices(glm::vec2 Location, std::string colour, std::string PeiceType)
-    :Peice("res/shaders/Peice.shader", (colour == "WHITE") ? "res/textures/" + PeiceType + "_w.png" : "res/textures/" + PeiceType + "_b.png"), Colour(colour)
+    :Peice("res/shaders/Peice.shader", (colour == "WHITE") ? "res/textures/" + PeiceType + "_w.png" : "res/textures/" + PeiceType + "_b.png"), Colour(colour), Type(PeiceType)
 {
     hwnd = FindWindowA(NULL, "NameNoWindowWillUse");
     position = Location;
@@ -80,9 +80,11 @@ bool Peices::CheckMouseCollison()
             MousePos.y < position_screen.y + (Windowy / 16.0f) &&
             MousePos.y > position_screen.y - (Windowy / 16.0f))
         {
+            IsHeld = true;
             return true;
         }
     }
+    IsHeld = false;
     return false;
 }
 
@@ -116,7 +118,22 @@ void Peices::Location()
 {
     GetMousePos();
     GetPosScreen();
-    if (CanGo)
+
+    // checks if other piece is held
+    bool IsOtherPeiceHeld = false;
+    if (!IsHeld)
+    {
+        for (int i = 0; i < PeiceVecMain.size(); i++)
+        {
+            if (PeiceVecMain[i]->IsHeld == true)
+            {
+                IsOtherPeiceHeld = true;
+            }
+        }
+    }
+    //
+
+    if (CanGo && !IsOtherPeiceHeld)
     {
         if (CheckMouseCollison())
         {
