@@ -148,6 +148,7 @@ void Peices::Location()
 
 void Peices::Render()
 {
+    Peice.Render(floor(position).x, floor(position).y);
     Peice.Render(position.x, position.y);
 }
 
