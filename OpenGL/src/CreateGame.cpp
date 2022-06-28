@@ -60,10 +60,19 @@ CreateGame::CreateGame()
 
 	King* King2 = new King(glm::vec2(3.0f, 7.0f), "BLACK");
 	Peices.push_back(King2);
+
 }
+
+void CreateGame::LoadData()
+{
+
+	//Peices = ;
+}
+
 
 void CreateGame::Main()
 {
+	LoadData();
 	for (int i = 0; i < Peices.size(); i++)
 	{
 		if (CurrentMove == Peices[i]->Colour)
@@ -87,7 +96,7 @@ void CreateGame::Main()
 		}
 		Peices[i]->Main(Peices);
 
-		RemoveDeadPeices();
+		//RemoveDeadPeices();
 		if (Peices[i]->HasMoved == true)
 		{
 			for (int k = 0; k < Peices.size(); k++)
@@ -113,7 +122,7 @@ bool CreateGame::CheckIfInCheck()
 			{
 				KingBPos = Peices[k]->Game_Pos;
 			}
-			else
+			if (Peices[k]->Colour == "WHITE")
 			{
 				KingWPos = Peices[k]->Game_Pos;
 			}
@@ -132,7 +141,7 @@ bool CreateGame::CheckIfInCheck()
 				}
 			}
 		}
-		if (Peices[l]->Type != "King" && Peices[l]->Colour == "WHTIE")
+		if (Peices[l]->Type != "King" && Peices[l]->Colour == "WHITE")
 		{
 			for (int i = 0; i < Peices[l]->AvailableMoves.size(); i++)
 			{

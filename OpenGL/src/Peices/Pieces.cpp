@@ -1,7 +1,7 @@
 #include "Peices\Pieces.h"
 
 Peices::Peices(glm::vec2 Location, std::string colour, std::string PeiceType)
-    :Peice("res/shaders/Peice.shader", (colour == "WHITE") ? "res/textures/" + PeiceType + "_w.png" : "res/textures/" + PeiceType + "_b.png"), Colour(colour), Type(PeiceType)
+    :Peice("res/shaders/Peice.shader", (colour == "WHITE") ? "res/textures/" + PeiceType + "_w.png" : "res/textures/" + PeiceType + "_b.png"), Colour(colour), Type(PeiceType), CellMove("res/shaders/Peice.shader", "res/textures/CanMoveTo.png")
 {
     hwnd = FindWindowA(NULL, "NameNoWindowWillUse");
     position = Location;
@@ -22,6 +22,8 @@ Peices::Peices(glm::vec2 Location, std::string colour, std::string PeiceType)
     };
 
     Peice.AddData(CubeData, Floats);
+    CellMove.AddData(CubeData, Floats);
+
 }
 
 bool Peices::IsOutOfBoard(glm::vec2 Pos)
@@ -150,6 +152,14 @@ void Peices::Render()
 {
     Peice.Render(floor(position).x, floor(position).y);
     Peice.Render(position.x, position.y);
+    if (IsHeld)
+    {
+        for (int i = 0; i < AvailableMoves.size(); i++)
+        {
+            CellMove.Render(AvailableMoves[i].x, AvailableMoves[i].y);
+        }
+    }
+
 }
 
 
@@ -216,18 +226,26 @@ std::vector<glm::vec2> Peices::RemoveSamePeice(std::vector<glm::vec2> Moves)
         int posdel = -1;
         for (int i = 0; i < Moves.size(); i++)
         {
+
             for (int k = 0; k < PeiceVecMain.size(); k++)
             {
                 if (Moves[i] == PeiceVecMain[k]->Game_Pos && Colour == PeiceVecMain[k]->Colour)
                 {
                     posdel = i;
                 }
+                else 
+                {
+                    /*
+                    if (Type == "King")
+                    {
+                        std::cout << Moves[i].x << std::endl;
+                    }*/
+                }
             }
         }
         if (posdel != -1)
         {
             Moves.erase(Moves.begin() + posdel);
-
         }
     }
     return Moves;

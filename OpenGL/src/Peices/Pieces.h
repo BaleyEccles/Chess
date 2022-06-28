@@ -68,6 +68,7 @@ public:
 
 	bool CanGo = true;
 	std::string Type;
+	RenderItem CellMove;
 
 
 };

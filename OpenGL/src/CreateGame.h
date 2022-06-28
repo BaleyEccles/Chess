@@ -14,8 +14,10 @@ public:
 
 	CreateGame();
 
+	void LoadData();	
 
 	std::vector<Peices*> Peices;
+
 
 	void Main();
 
