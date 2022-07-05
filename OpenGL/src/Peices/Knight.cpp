@@ -26,18 +26,17 @@ Knight::Knight(glm::vec2 Location, std::string colour)
 }
 
 
-std::vector<glm::vec2> Knight::GetAvalibleMoves()
+void Knight::GetAvalibleMoves()
 {
-    std::vector<glm::vec2> Moves;
+    AvailableMoves.clear();
 
-    Moves.push_back(glm::vec2(Game_Pos.x + 2.0f, Game_Pos.y + 1.0f));
-    Moves.push_back(glm::vec2(Game_Pos.x + 1.0f, Game_Pos.y + 2.0f));
-    Moves.push_back(glm::vec2(Game_Pos.x + 2.0f, Game_Pos.y - 1.0f));
-    Moves.push_back(glm::vec2(Game_Pos.x - 2.0f, Game_Pos.y + 1.0f));
-    Moves.push_back(glm::vec2(Game_Pos.x - 2.0f, Game_Pos.y - 1.0f));
-    Moves.push_back(glm::vec2(Game_Pos.x + 1.0f, Game_Pos.y - 2.0f));
-    Moves.push_back(glm::vec2(Game_Pos.x - 1.0f, Game_Pos.y + 2.0f));
-    Moves.push_back(glm::vec2(Game_Pos.x - 1.0f, Game_Pos.y - 2.0f));
+    AvailableMoves.push_back(glm::vec2(Game_Pos.x + 2.0f, Game_Pos.y + 1.0f));
+    AvailableMoves.push_back(glm::vec2(Game_Pos.x + 1.0f, Game_Pos.y + 2.0f));
+    AvailableMoves.push_back(glm::vec2(Game_Pos.x + 2.0f, Game_Pos.y - 1.0f));
+    AvailableMoves.push_back(glm::vec2(Game_Pos.x - 2.0f, Game_Pos.y + 1.0f));
+    AvailableMoves.push_back(glm::vec2(Game_Pos.x - 2.0f, Game_Pos.y - 1.0f));
+    AvailableMoves.push_back(glm::vec2(Game_Pos.x + 1.0f, Game_Pos.y - 2.0f));
+    AvailableMoves.push_back(glm::vec2(Game_Pos.x - 1.0f, Game_Pos.y + 2.0f));
+    AvailableMoves.push_back(glm::vec2(Game_Pos.x - 1.0f, Game_Pos.y - 2.0f));
 
-    return Moves;
 }

@@ -110,8 +110,8 @@ void Peices::Main(std::vector<Peices*> PeiceVec)
 
 void Peices::UpdateAvailableMoves()
 {
-    AvailableMoves = GetAvalibleMoves();
-    AvailableMoves = RemoveSamePeice(AvailableMoves);
+    GetAvalibleMoves();
+    RemoveSamePeice();
 }
 
 
@@ -200,7 +200,7 @@ bool Peices::CheckPosIsOccupied(glm::vec2 Pos)
 {
     for (int i = 0; i < PeiceVecMain.size(); i++)
     {
-        if (PeiceVecMain[i]->Game_Pos == Pos)
+        if (floor(PeiceVecMain[i]->Game_Pos) == floor(Pos))
         {
             return true;
         }
@@ -210,6 +210,7 @@ bool Peices::CheckPosIsOccupied(glm::vec2 Pos)
 
 void Peices::CheckTakePeice()
 {
+
     for (int i = 0; i < PeiceVecMain.size(); i++)
     {
         if (PeiceVecMain[i]->Game_Pos == Game_Pos && PeiceVecMain[i]->Colour != Colour)
@@ -219,40 +220,30 @@ void Peices::CheckTakePeice()
     }
 }
 
-std::vector<glm::vec2> Peices::RemoveSamePeice(std::vector<glm::vec2> Moves)
+void Peices::RemoveSamePeice()
 {
-    for (int i = 0; i < Moves.size(); i++)
+    std::vector<int> PosDel;
+    for (int i = 0; i < AvailableMoves.size(); i++)
     {
-        int posdel = -1;
-        for (int i = 0; i < Moves.size(); i++)
+        for (int k = 0; k < PeiceVecMain.size(); k++)
         {
-
-            for (int k = 0; k < PeiceVecMain.size(); k++)
+            if (AvailableMoves[i] == PeiceVecMain[k]->Game_Pos && Colour == PeiceVecMain[k]->Colour && PeiceVecMain[k]->IsDead == false)
             {
-                if (Moves[i] == PeiceVecMain[k]->Game_Pos && Colour == PeiceVecMain[k]->Colour)
-                {
-                    posdel = i;
-                }
-                else 
-                {
-                    /*
-                    if (Type == "King")
-                    {
-                        std::cout << Moves[i].x << std::endl;
-                    }*/
-                }
+                PosDel.push_back(i);
             }
         }
-        if (posdel != -1)
+    }
+    for (int l = 0; l < PosDel.size(); l++) {
+        AvailableMoves.erase(AvailableMoves.begin() + PosDel[l]);
+        for (int j = 0; j < PosDel.size(); j++)
         {
-            Moves.erase(Moves.begin() + posdel);
+            PosDel[j] -= 1;
         }
     }
-    return Moves;
+    
 }
 
-std::vector<glm::vec2> Peices::GetAvalibleMoves()
+void Peices::GetAvalibleMoves()
 {
-    return std::vector<glm::vec2>();
 }
 

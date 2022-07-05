@@ -24,48 +24,46 @@ Pawn::Pawn(glm::vec2 Location, std::string colour)
     Peice.AddData(CubeData, Floats);
 }
 
-std::vector<glm::vec2> Pawn::GetAvalibleMoves()
+void Pawn::GetAvalibleMoves()
 {
+    AvailableMoves.clear();
 
-    std::vector<glm::vec2> Moves;
     if (Colour == "BLACK")
     {
         if (Game_Pos.y == 6 && !CheckPosIsOccupied(glm::vec2(Game_Pos.x, Game_Pos.y - 2.0f)))
         {
-            Moves.push_back(glm::vec2(Game_Pos.x, Game_Pos.y - 2.0f));
+            AvailableMoves.push_back(glm::vec2(Game_Pos.x, Game_Pos.y - 2.0f));
         }
         if (!CheckPosIsOccupied(glm::vec2(Game_Pos.x, Game_Pos.y - 1.0f)))
         {
-            Moves.push_back(glm::vec2(Game_Pos.x, Game_Pos.y - 1.0f));
+            AvailableMoves.push_back(glm::vec2(Game_Pos.x, Game_Pos.y - 1.0f));
         }
         if (CheckPosIsOccupied(glm::vec2(Game_Pos.x + 1.0f, Game_Pos.y - 1.0f)))
         {
-            Moves.push_back(glm::vec2(Game_Pos.x + 1.0f, Game_Pos.y - 1.0f));
+            AvailableMoves.push_back(glm::vec2(Game_Pos.x + 1.0f, Game_Pos.y - 1.0f));
         }
         if (CheckPosIsOccupied(glm::vec2(Game_Pos.x - 1.0f, Game_Pos.y - 1.0f)))
         {
-            Moves.push_back(glm::vec2(Game_Pos.x - 1.0f, Game_Pos.y - 1.0f));
+            AvailableMoves.push_back(glm::vec2(Game_Pos.x - 1.0f, Game_Pos.y - 1.0f));
         }
     }
     if (Colour == "WHITE")
     {
         if (Game_Pos.y == 1 && !CheckPosIsOccupied(glm::vec2(Game_Pos.x, Game_Pos.y + 2.0f)))
         {
-            Moves.push_back(glm::vec2(Game_Pos.x, Game_Pos.y + 2.0f));
+            AvailableMoves.push_back(glm::vec2(Game_Pos.x, Game_Pos.y + 2.0f));
         }
         if (!CheckPosIsOccupied(glm::vec2(Game_Pos.x, Game_Pos.y + 1.0f)))
         {
-            Moves.push_back(glm::vec2(Game_Pos.x, Game_Pos.y + 1.0f));
+            AvailableMoves.push_back(glm::vec2(Game_Pos.x, Game_Pos.y + 1.0f));
         }
         if (CheckPosIsOccupied(glm::vec2(Game_Pos.x + 1.0f, Game_Pos.y + 1.0f)))
         {
-            Moves.push_back(glm::vec2(Game_Pos.x + 1.0f, Game_Pos.y + 1.0f));
+            AvailableMoves.push_back(glm::vec2(Game_Pos.x + 1.0f, Game_Pos.y + 1.0f));
         }
         if (CheckPosIsOccupied(glm::vec2(Game_Pos.x - 1.0f, Game_Pos.y + 1.0f)))
         {
-            Moves.push_back(glm::vec2(Game_Pos.x - 1.0f, Game_Pos.y + 1.0f));
+            AvailableMoves.push_back(glm::vec2(Game_Pos.x - 1.0f, Game_Pos.y + 1.0f));
         }
     }
-
-    return Moves;
 }

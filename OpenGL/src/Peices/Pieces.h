@@ -42,7 +42,7 @@ public:
 
 	virtual void Render();
 
-	virtual std::vector<glm::vec2> RemoveSamePeice(std::vector<glm::vec2> Moves);
+	virtual void RemoveSamePeice();
 
 	virtual void SetPosToCell();
 
@@ -52,7 +52,7 @@ public:
 
 	virtual void CheckTakePeice();
 
-	virtual std::vector<glm::vec2> GetAvalibleMoves();
+	virtual void GetAvalibleMoves();
 
 
 	virtual void UpdateAvailableMoves();

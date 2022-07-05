@@ -24,7 +24,6 @@ public:
 	std::string CurrentMove = "WHITE";
 
 	void SwapSide();
-	void RemoveDeadPeices();
 	bool CheckIfInCheck();
 
 

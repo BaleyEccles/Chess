@@ -26,25 +26,23 @@ Bishop::Bishop(glm::vec2 Location, std::string colour)
 }
 
 
-std::vector<glm::vec2> Bishop::GetAvalibleMoves()
+void Bishop::GetAvalibleMoves()
 {
-    std::vector<glm::vec2> Moves;
-    // diagonal
+    AvailableMoves.clear();
 
     bool FirstPos = true;
     // diagonal
-    FirstPos = true;
     for (int k = 1; k < 16; k++)
     {
         if (CheckPosIsOccupied(glm::vec2(Game_Pos.x + (float)k, Game_Pos.y + (float)k)) && FirstPos)
         {
             FirstPos = false;
-            Moves.push_back(glm::vec2(Game_Pos.x + (float)k, Game_Pos.y + (float)k));
+            AvailableMoves.push_back(glm::vec2(Game_Pos.x + (float)k, Game_Pos.y + (float)k));
         }
         else {
             if (FirstPos)
             {
-                Moves.push_back(glm::vec2(Game_Pos.x + (float)k, Game_Pos.y + (float)k));
+                AvailableMoves.push_back(glm::vec2(Game_Pos.x + (float)k, Game_Pos.y + (float)k));
             }
         }
     }
@@ -54,13 +52,13 @@ std::vector<glm::vec2> Bishop::GetAvalibleMoves()
         if (CheckPosIsOccupied(glm::vec2(Game_Pos.x - (float)k, Game_Pos.y + (float)k)) && FirstPos)
         {
             FirstPos = false;
-            Moves.push_back(glm::vec2(Game_Pos.x - (float)k, Game_Pos.y + (float)k));
+            AvailableMoves.push_back(glm::vec2(Game_Pos.x - (float)k, Game_Pos.y + (float)k));
 
         }
         else {
             if (FirstPos)
             {
-                Moves.push_back(glm::vec2(Game_Pos.x + -(float)k, Game_Pos.y + (float)k));
+                AvailableMoves.push_back(glm::vec2(Game_Pos.x + -(float)k, Game_Pos.y + (float)k));
             }
         }
     }
@@ -70,12 +68,12 @@ std::vector<glm::vec2> Bishop::GetAvalibleMoves()
         if (CheckPosIsOccupied(glm::vec2(Game_Pos.x + (float)k, Game_Pos.y - (float)k)) && FirstPos)
         {
             FirstPos = false;
-            Moves.push_back(glm::vec2(Game_Pos.x + (float)k, Game_Pos.y - (float)k));
+            AvailableMoves.push_back(glm::vec2(Game_Pos.x + (float)k, Game_Pos.y - (float)k));
         }
         else {
             if (FirstPos)
             {
-                Moves.push_back(glm::vec2(Game_Pos.x + (float)k, Game_Pos.y + -(float)k));
+                AvailableMoves.push_back(glm::vec2(Game_Pos.x + (float)k, Game_Pos.y + -(float)k));
             }
         }
     }
@@ -87,15 +85,14 @@ std::vector<glm::vec2> Bishop::GetAvalibleMoves()
 
             FirstPos = false;
 
-            Moves.push_back(glm::vec2(Game_Pos.x - (float)k, Game_Pos.y - (float)k));
+            AvailableMoves.push_back(glm::vec2(Game_Pos.x - (float)k, Game_Pos.y - (float)k));
         }
         else {
             if (FirstPos)
             {
-                Moves.push_back(glm::vec2(Game_Pos.x - (float)k, Game_Pos.y - (float)k));
+                AvailableMoves.push_back(glm::vec2(Game_Pos.x - (float)k, Game_Pos.y - (float)k));
             }
         }
     }
 
-    return Moves;
 }

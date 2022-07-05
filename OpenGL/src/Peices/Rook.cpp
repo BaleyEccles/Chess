@@ -25,9 +25,10 @@ Rook::Rook(glm::vec2 Location, std::string colour)
     Peice.AddData(CubeData, Floats);
 }
 
-std::vector<glm::vec2> Rook::GetAvalibleMoves()
+void Rook::GetAvalibleMoves()
 {
-    std::vector<glm::vec2> Moves;
+    AvailableMoves.clear();
+
     // horizontal
     bool FirstPos = true;
     for (int k = 1; k < 10; k++)
@@ -35,12 +36,12 @@ std::vector<glm::vec2> Rook::GetAvalibleMoves()
         if (CheckPosIsOccupied(glm::vec2(Game_Pos.x + (float)k, Game_Pos.y)) && FirstPos)
         {
             FirstPos = false;
-            Moves.push_back(glm::vec2(Game_Pos.x + (float)k, Game_Pos.y));
+            AvailableMoves.push_back(glm::vec2(Game_Pos.x + (float)k, Game_Pos.y));
         }
         else {
             if (FirstPos)
             {
-                Moves.push_back(glm::vec2(Game_Pos.x + (float)k, Game_Pos.y));
+                AvailableMoves.push_back(glm::vec2(Game_Pos.x + (float)k, Game_Pos.y));
             }
 
         }
@@ -51,13 +52,13 @@ std::vector<glm::vec2> Rook::GetAvalibleMoves()
         if (CheckPosIsOccupied(glm::vec2(Game_Pos.x + (float)k, Game_Pos.y)) && FirstPos)
         {
             FirstPos = false;
-            Moves.push_back(glm::vec2(Game_Pos.x + (float)k, Game_Pos.y));
+            AvailableMoves.push_back(glm::vec2(Game_Pos.x + (float)k, Game_Pos.y));
 
         }
         else {
             if (FirstPos)
             {
-                Moves.push_back(glm::vec2(Game_Pos.x + (float)k, Game_Pos.y));
+                AvailableMoves.push_back(glm::vec2(Game_Pos.x + (float)k, Game_Pos.y));
             }
 
         }
@@ -69,12 +70,12 @@ std::vector<glm::vec2> Rook::GetAvalibleMoves()
         if (CheckPosIsOccupied(glm::vec2(Game_Pos.x, Game_Pos.y + (float)k)) && FirstPos)
         {
             FirstPos = false;
-            Moves.push_back(glm::vec2(Game_Pos.x, Game_Pos.y + (float)k));
+            AvailableMoves.push_back(glm::vec2(Game_Pos.x, Game_Pos.y + (float)k));
         }
         else {
             if (FirstPos)
             {
-                Moves.push_back(glm::vec2(Game_Pos.x, Game_Pos.y + (float)k));
+                AvailableMoves.push_back(glm::vec2(Game_Pos.x, Game_Pos.y + (float)k));
             }
 
         }
@@ -85,15 +86,14 @@ std::vector<glm::vec2> Rook::GetAvalibleMoves()
         if (CheckPosIsOccupied(glm::vec2(Game_Pos.x, Game_Pos.y + (float)k)) && FirstPos)
         {
             FirstPos = false;
-            Moves.push_back(glm::vec2(Game_Pos.x, Game_Pos.y + (float)k));
+            AvailableMoves.push_back(glm::vec2(Game_Pos.x, Game_Pos.y + (float)k));
         }
         else {
             if (FirstPos)
             {
-                Moves.push_back(glm::vec2(Game_Pos.x, Game_Pos.y + (float)k));
+                AvailableMoves.push_back(glm::vec2(Game_Pos.x, Game_Pos.y + (float)k));
             }
 
         }
     }
-    return Moves;
 }

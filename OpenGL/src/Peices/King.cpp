@@ -24,21 +24,20 @@ King::King(glm::vec2 Location, std::string colour)
     Peice.AddData(CubeData, Floats);
 }
 
-std::vector<glm::vec2> King::GetAvalibleMoves()
+void King::GetAvalibleMoves()
 {
     //std::cout << "King" << std::endl;
+    AvailableMoves.clear();
 
-    std::vector<glm::vec2> Moves;
 
-    Moves.push_back(glm::vec2(Game_Pos.x + 1.0f, Game_Pos.y + 1.0f));
-    Moves.push_back(glm::vec2(Game_Pos.x - 1.0f, Game_Pos.y - 1.0f));
-    Moves.push_back(glm::vec2(Game_Pos.x - 1.0f, Game_Pos.y + 1.0f));
-    Moves.push_back(glm::vec2(Game_Pos.x + 1.0f, Game_Pos.y - 1.0f));
+    AvailableMoves.push_back(glm::vec2(Game_Pos.x + 1.0f, Game_Pos.y + 1.0f));
+    AvailableMoves.push_back(glm::vec2(Game_Pos.x - 1.0f, Game_Pos.y - 1.0f));
+    AvailableMoves.push_back(glm::vec2(Game_Pos.x - 1.0f, Game_Pos.y + 1.0f));
+    AvailableMoves.push_back(glm::vec2(Game_Pos.x + 1.0f, Game_Pos.y - 1.0f));
 
-    Moves.push_back(glm::vec2(Game_Pos.x + 1.0f, Game_Pos.y));
-    Moves.push_back(glm::vec2(Game_Pos.x - 1.0f, Game_Pos.y));
-    Moves.push_back(glm::vec2(Game_Pos.x, Game_Pos.y + 1.0f));
-    Moves.push_back(glm::vec2(Game_Pos.x, Game_Pos.y - 1.0f));
+    AvailableMoves.push_back(glm::vec2(Game_Pos.x + 1.0f, Game_Pos.y));
+    AvailableMoves.push_back(glm::vec2(Game_Pos.x - 1.0f, Game_Pos.y));
+    AvailableMoves.push_back(glm::vec2(Game_Pos.x, Game_Pos.y + 1.0f));
+    AvailableMoves.push_back(glm::vec2(Game_Pos.x, Game_Pos.y - 1.0f));
 
-    return Moves;
 }

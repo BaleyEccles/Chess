@@ -96,9 +96,9 @@ void CreateGame::Main()
 		}
 		Peices[i]->Main(Peices);
 
-		//RemoveDeadPeices();
 		if (Peices[i]->HasMoved == true)
 		{
+			//std::cout << i << std::endl;
 			for (int k = 0; k < Peices.size(); k++)
 			{
 				Peices[k]->UpdateAvailableMoves();
@@ -172,23 +172,3 @@ void CreateGame::SwapSide()
 	}
 }
 
-void CreateGame::RemoveDeadPeices()
-{
-
-	for (int i = 0; i < Peices.size(); i++)
-	{
-		int posdel = -1;
-		for (int i = 0; i < Peices.size(); i++)
-		{
-			if (Peices[i]->IsDead)
-			{
-				posdel = i;
-			}
-		}
-		if (posdel != -1)
-		{
-			Peices.erase(Peices.begin() + posdel);
-
-		}
-	}
-}

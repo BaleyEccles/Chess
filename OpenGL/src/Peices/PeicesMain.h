@@ -12,7 +12,7 @@ class Rook : public virtual Peices
 public:
 	Rook(glm::vec2 Location, std::string colour);
 
-	std::vector<glm::vec2> GetAvalibleMoves() override;
+	void GetAvalibleMoves() override;
 };
 
 class Pawn : public virtual Peices
@@ -20,7 +20,7 @@ class Pawn : public virtual Peices
 public:
 	Pawn(glm::vec2 Location, std::string colour);
 
-	std::vector<glm::vec2> GetAvalibleMoves() override;
+	void GetAvalibleMoves() override;
 };
 
 class Bishop : public virtual Peices
@@ -28,7 +28,7 @@ class Bishop : public virtual Peices
 public:
 	Bishop(glm::vec2 Location, std::string colour);
 
-	std::vector<glm::vec2> GetAvalibleMoves() override;
+	void GetAvalibleMoves() override;
 };
 
 class Queen : public virtual Peices
@@ -36,7 +36,7 @@ class Queen : public virtual Peices
 public:
 	Queen(glm::vec2 Location, std::string colour);
 
-	std::vector<glm::vec2> GetAvalibleMoves() override;
+	void GetAvalibleMoves() override;
 
 };
 
@@ -45,7 +45,7 @@ class Knight : public virtual Peices
 public:
 	Knight(glm::vec2 Location, std::string colour);
 
-	std::vector<glm::vec2> GetAvalibleMoves() override;
+	void GetAvalibleMoves() override;
 };
 
 class King : public virtual Peices
@@ -53,8 +53,7 @@ class King : public virtual Peices
 public:
 	King(glm::vec2 Location, std::string colour);
 
-	std::vector<glm::vec2> GetAvalibleMoves() override;
+	void GetAvalibleMoves() override;
 
-	//std::vector<glm::vec2> RemoveInWayPeices(std::vector<glm::vec2> Moves) override;
 
 };
