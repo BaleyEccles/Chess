@@ -27,7 +27,7 @@
 #include "RenderItem.h"
 #include "globals.cpp"
 #include "CreateGame.h"
-
+#include "Networking/Networking.h"
 /*
 data to jSON to server to client to data to baord
 */
@@ -143,6 +143,10 @@ int main(void)
 
         Peice.AddData(CubeData, Floats);*/
 
+        Networking NetworkingMain;
+
+
+
         do {
             //MoveWindow(hWnd_Game, 0, -25, Windowx, Windowy, TRUE);
             GLCall(glClearColor(0.0f/ 255.0f, 162.0f / 255.0f, 219.0f / 255.0f, 1.0f));
@@ -152,7 +156,7 @@ int main(void)
 
             BoardMain.RenderBoard();
             Game.Main();
-
+            NetworkingMain.CreateJSON(Game.Peices);
             // Swap buffers
             glfwSwapBuffers(window);
             glfwPollEvents();

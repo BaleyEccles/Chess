@@ -156,6 +156,7 @@
     <ClCompile Include="src\CreateGame.cpp" />
     <ClCompile Include="src\globals.cpp" />
     <ClCompile Include="src\IndexBuffer.cpp" />
+    <ClCompile Include="src\Networking\Networking.cpp" />
     <ClCompile Include="src\Peices\Bishop.cpp" />
     <ClCompile Include="src\Peices\King.cpp" />
     <ClCompile Include="src\Peices\Knight.cpp" />
@@ -239,6 +240,9 @@
     <ClInclude Include="src\CreateGame.h" />
     <ClInclude Include="src\IndexBuffer.h" />
     <ClInclude Include="src\Debug.h" />
+    <ClInclude Include="src\Networking\json.hpp" />
+    <ClInclude Include="src\Networking\HTTPRequest.hpp" />
+    <ClInclude Include="src\Networking\Networking.h" />
     <ClInclude Include="src\Peices\PeicesMain.h" />
     <ClInclude Include="src\Peices\Pieces.h" />
     <ClInclude Include="src\Renderer.h" />

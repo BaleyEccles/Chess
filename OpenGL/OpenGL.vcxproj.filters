@@ -81,6 +81,9 @@
     <ClCompile Include="src\Peices\King.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Networking\Networking.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Renderer.h">
@@ -1326,6 +1329,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Peices\PeicesMain.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Networking\HTTPRequest.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Networking\Networking.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Networking\json.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

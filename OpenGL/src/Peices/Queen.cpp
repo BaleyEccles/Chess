@@ -164,6 +164,7 @@ void Queen::GetAvalibleMoves()
             }
         }
     }
-    
+
+
 
 }

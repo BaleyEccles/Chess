@@ -8,6 +8,12 @@
 #include <cmath>
 #include "Peices/PeicesMain.h"
 
+struct CheckVaribles{
+	bool IsInCheck = false;
+	std::vector<glm::vec2> CheckMoves;
+};
+
+
 class CreateGame
 {
 public:
@@ -24,9 +30,9 @@ public:
 	std::string CurrentMove = "WHITE";
 
 	void SwapSide();
-	bool CheckIfInCheck();
+	CheckVaribles CheckIfInCheck();
 
-
+	void RemoveDeadPiece();
 private:
 
 

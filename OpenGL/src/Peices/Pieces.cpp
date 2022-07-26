@@ -202,7 +202,14 @@ bool Peices::CheckPosIsOccupied(glm::vec2 Pos)
     {
         if (floor(PeiceVecMain[i]->Game_Pos) == floor(Pos))
         {
-            return true;
+            if (PeiceVecMain[i]->Type == "King" && PeiceVecMain[i]->Colour != Colour)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
     }
     return false;
@@ -240,7 +247,21 @@ void Peices::RemoveSamePeice()
             PosDel[j] -= 1;
         }
     }
-    
+    PosDel.clear();
+    for (int i = 0; i < AvailableMoves.size(); i++)
+    {
+        if (AvailableMoves[i].x < 0 || AvailableMoves[i].x > 7 || AvailableMoves[i].y < 0 || AvailableMoves[i].y > 7)
+        {
+            PosDel.push_back(i);
+        }
+    }
+    for (int l = 0; l < PosDel.size(); l++) {
+        AvailableMoves.erase(AvailableMoves.begin() + PosDel[l]);
+        for (int j = 0; j < PosDel.size(); j++)
+        {
+            PosDel[j] -= 1;
+        }
+    }
 }
 
 void Peices::GetAvalibleMoves()
