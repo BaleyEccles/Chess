@@ -20,9 +20,10 @@ public:
 
 	CreateGame();
 
-	void LoadData();	
+	void LoadData(std::vector<Peices*> Data);
 
-	std::vector<Peices*> Peices;
+	std::vector<Peices*> Pieces;
+	std::vector<Peices*> DefaultStart;
 
 
 	void Main();
@@ -31,6 +32,9 @@ public:
 
 	void SwapSide();
 	CheckVaribles CheckIfInCheck();
+
+
+	void RestartGame();
 
 	void RemoveDeadPiece();
 private:
