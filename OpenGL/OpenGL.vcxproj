@@ -123,7 +123,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions);GLEW_STATIC</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir)\src\vendor\;$(ProjectDir)\src\vendor\imgui;$(ProjectDir)\Dependencies\freetype-2.12.1\include;$(ProjectDir)\Dependencies\GLFW\include;src;$(ProjectDir)\Dependencies\glew-2.1.0\include</AdditionalIncludeDirectories>
-      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
