@@ -116,7 +116,7 @@ void CreateGame::Main()
 					}
 
 				}
-
+				/*
 				for (int b = 0; b < Pieces.size(); b++)
 				{
 					std::vector<int> PosDel;
@@ -160,7 +160,7 @@ void CreateGame::Main()
 						}
 					}
 					PosDel.clear();
-				}
+				}*/
 			}
 		}
 		for (int b = 0; b < Pieces.size(); b++)
@@ -189,7 +189,7 @@ void CreateGame::Main()
 					}
 				}
 
-
+				/*
 				for (int z = 0; z < PosDel.size(); z++)
 				{
 					Pieces[b]->AvailableMoves.erase(Pieces[b]->AvailableMoves.begin() + PosDel[z]);
@@ -200,7 +200,7 @@ void CreateGame::Main()
 						PosDel[j] -= 1;
 					}
 				}
-				PosDel.clear();
+				PosDel.clear();*/
 
 			}
 		}
