@@ -17,7 +17,6 @@
 #include "VertexBufferLayout.h"
 #include "vendor/glm/glm.hpp"
 #include "vendor/glm/gtc/matrix_transform.hpp"
-#include <Windows.h>
 #include <chrono>
 #include <random>
 #include <math.h>
@@ -28,10 +27,6 @@
 #include "globals.cpp"
 #include "CreateGame.h"
 #include "Networking/Networking.h"
-/*
-data to jSON to server to client to data to baord
-*/
-
 
 
 GLFWwindow* InitWindow()
@@ -97,6 +92,8 @@ int main(void)
     MoveWindow(hWnd_Game, 0, -25, Windowx, Windowy + 56, TRUE);
     ShowWindow(hWnd_Game, SHOW_FULLSCREEN);
     {
+        Networking NetworkingMain;
+
         GLCall(glEnable(GL_BLEND));
         GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
 
@@ -143,8 +140,7 @@ int main(void)
 
         Peice.AddData(CubeData, Floats);*/
 
-        Networking NetworkingMain;
-
+        
 
 
         do {
@@ -157,6 +153,7 @@ int main(void)
             BoardMain.RenderBoard();
             Game.Main();
             NetworkingMain.CreateJSON(Game.Pieces);
+            NetworkingMain.PostRequest();
             // Swap buffers
             glfwSwapBuffers(window);
             glfwPollEvents();

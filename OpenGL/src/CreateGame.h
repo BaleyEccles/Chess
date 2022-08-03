@@ -33,7 +33,7 @@ public:
 	void SwapSide();
 	CheckVaribles CheckIfInCheck();
 
-
+	void DealWithCheck(CheckVaribles CheckVar);
 	void RestartGame();
 
 	void RemoveDeadPiece();

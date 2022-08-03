@@ -1331,9 +1331,6 @@
     <ClInclude Include="src\Peices\PeicesMain.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Networking\HTTPRequest.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\Networking\Networking.h">
       <Filter>Header Files</Filter>
     </ClInclude>

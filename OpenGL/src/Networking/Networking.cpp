@@ -2,12 +2,13 @@
 
 Networking::Networking()
 {
-    /*
-    std::string Location;
-    std::cout << "Please input the loctaion of the server: ";
-    std::cin >> Location;
-    http::Request Request{ Location };
-    request = &Request;*/
+    std::cout << "please input the server url \n";
+        std::cin >> URL;
+
+    std::cout << "please input the InviteID \n";
+        std::cin >> InviteID;
+
+
 }
 
 Networking::~Networking()
@@ -23,16 +24,20 @@ void Networking::CreateJSON(std::vector<Peices*> Peices)
     }
     std::ofstream file("Send.json");
     file << JSON;
+    //std::cout << JSON << std::endl;
     file.close();
+
 }
 
-void Networking::ReadJSON()
+json Networking::ReadJSON()
 {
     std::ifstream myFile("Receive.json");
     std::ostringstream tmp;
     tmp << myFile.rdbuf();
     std::string JSONFile = tmp.str();
     json data = json::parse(JSONFile);
+    std::cout << data << std::endl;
+    return data;
     //can be used to access the data in the json file
     //data.at("Pieces").at("Pawn10").at("IsDead")
 }
@@ -40,35 +45,57 @@ void Networking::ReadJSON()
 void Networking::GetRequest()
 {
     /*
-    try
-    {
-        // you can pass http::InternetProtocol::V6 to Request to make an IPv6 request
-        http::Request request{ "http://test.com/test" };
-
-        // send a get request
-        const auto response = request.send("GET");
-        std::cout << std::string{ response.body.begin(), response.body.end() } << '\n'; // print the result
+    std::string text;
+    //getline(cin, url);
+    std::string url = "147.41.128.35";
+    url = "curl -o data.json " + url;//Adding the CURL command to the URL (I save the result in a file called data.txt)
+    system(url.c_str());//Executing script
+    //system("clear");//Clearing previous logs so that the result can be seen neatly
+    std::string res;
+    std::ifstream file("data.json");//Retrieving response from data.txt
+    while (getline(file, res)) {
+        std::cout << res;
     }
-    catch (const std::exception& e)
-    {
-        std::cerr << "Request failed, error: " << e.what() << '\n';
-    }*/
-    
+    file.close();
+    //remove("data.txt");//Deleting file after the output is shown
+    std::cout << "\nDone\n";//Voila
+    */
 }
 
-void Networking::PostRequest()
+void Networking::PostRequest()// todo check if two pc can connect via ip
 {
-    /*try
-    {
-        http::Request request{ "http://test.com/test" };
-        const std::string body = "{\"foo\": 1, \"bar\": \"baz\"}";
-        const auto response = request.send("POST", parameters, {
-            {"Content-Type", "application/json"}
-            });
-        std::cout << std::string{ response.body.begin(), response.body.end() } << '\n'; // print the result
+    /*
+    std::string text;
+    std::string url;
+
+
+    //std::cout << gethostname() << std::endl;
+
+
+    url = "curl -X POST -d @Send.json 10.5.146.137";
+    url = "curl -v --header \"Content-Type: application/json\" -d @Send.json http://localhost:3000/test";
+    //     curl -v --header "Content-Type: application/json" -d "{\"value\":\"node JS\"}" http://localhost:3000/test
+
+
+    //url = "curl --help all";
+
+
+
+
+    std::cout << "dsad" << std::endl;
+
+
+
+    system(url.c_str());//Executing script
+    //system("clear");//Clearing previous logs so that the result can be seen neatly
+    /*std::string res;
+    std::ifstream file("data.json");//Retrieving response from data.txt
+    while (getline(file, res)) {
+        std::cout << res;
     }
-    catch (const std::exception& e)
-    {
-        std::cerr << "Request failed, error: " << e.what() << '\n';
-    }*/
+    file.close();
+    //remove("data.txt");//Deleting file after the output is shown*/
+    //std::cout << "\nDone\n";//Voila
+    
+    
 }

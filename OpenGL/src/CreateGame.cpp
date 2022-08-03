@@ -69,6 +69,83 @@ void CreateGame::LoadData(std::vector<Peices*> Data)
 	
 }
 
+void CreateGame::DealWithCheck(CheckVaribles CheckVar)
+{
+	std::cout << "dsadas" << std::endl;
+	for (int b = 0; b < Pieces.size(); b++)
+	{
+		if (Pieces[b]->Type != "King" && Pieces[b]->Colour == CurrentMove)
+		{
+			for (int u = 0; u < Pieces[b]->AvailableMoves.size(); u++)
+			{
+				bool CanGo = false;
+
+				for (int g = 0; g < CheckVar.CheckMoves.size(); g++)
+				{
+					if (Pieces[b]->AvailableMoves[u] == CheckVar.CheckMoves[g])
+					{
+						CanGo = true;
+					}
+					else
+					{
+						if (!CanGo)
+						{
+							CanGo = false;
+						}
+					}
+				}
+				Pieces[b]->CanGo = CanGo;
+
+			}
+
+		}
+
+		for (int b = 0; b < Pieces.size(); b++)
+		{
+			std::vector<int> PosDel;
+
+			if (Pieces[b]->Type != "King" && Pieces[b]->Colour == CurrentMove && Pieces[b]->CanGo == true)
+			{
+				for (int g = 0; g < CheckVar.CheckMoves.size(); g++)
+				{
+					for (int u = 0; u < Pieces[b]->AvailableMoves.size(); u++)
+					{
+						if (CheckVar.CheckMoves[g] != Pieces[b]->AvailableMoves[u])
+						{
+							PosDel.push_back(u);
+
+						}
+					}
+				}
+			}
+			for (int h = 0; h < PosDel.size(); h++)
+			{
+				for (int y = 0; y < PosDel.size(); y++)
+				{
+					if (y != h)
+					{
+						if (PosDel[y] == PosDel[h])
+						{
+							PosDel.erase(PosDel.begin() + y);
+							y--;
+						}
+					}
+				}
+			}
+			for (int z = 0; z < PosDel.size(); z++)
+			{
+				Pieces[b]->AvailableMoves.erase(Pieces[b]->AvailableMoves.begin() + PosDel[z]);
+
+				for (int j = 0; j < PosDel.size(); j++)
+				{
+
+					PosDel[j] -= 1;
+				}
+			}
+			PosDel.clear();
+		}
+	}
+}
 
 void CreateGame::Main()
 {
@@ -89,79 +166,8 @@ void CreateGame::Main()
 
 		if (CheckVaribles.IsInCheck)
 		{
-			for (int b = 0; b < Pieces.size(); b++)
-			{
-				if (Pieces[b]->Type != "King" && Pieces[b]->Colour == CurrentMove)
-				{
-					for (int u = 0; u < Pieces[b]->AvailableMoves.size(); u++)
-					{
-						bool CanGo = false;
-						
-						for (int g = 0; g < CheckVaribles.CheckMoves.size(); g++)
-						{
-							if (Pieces[b]->AvailableMoves[u] == CheckVaribles.CheckMoves[g])
-							{
-								CanGo = true;
-							}
-							else
-							{
-								if (!CanGo)
-								{
-									CanGo = false;
-								}
-							}
-						}
-						Pieces[b]->CanGo = CanGo;
-
-					}
-
-				}
-				/*
-				for (int b = 0; b < Pieces.size(); b++)
-				{
-					std::vector<int> PosDel;
-
-					if (Pieces[b]->Type != "King" && Pieces[b]->Colour == CurrentMove && Pieces[b]->CanGo == true)
-					{
-						for (int g = 0; g < CheckVaribles.CheckMoves.size(); g++)
-						{
-							for (int u = 0; u < Pieces[b]->AvailableMoves.size(); u++)
-							{
-								if (CheckVaribles.CheckMoves[g] != Pieces[b]->AvailableMoves[u])
-								{
-									PosDel.push_back(u);
-
-								}
-							}
-						}
-					}
-					for (int h = 0; h < PosDel.size(); h++)
-					{
-						for (int y = 0; y < PosDel.size(); y++)
-						{
-							if (y != h)
-							{
-								if (PosDel[y] == PosDel[h])
-								{
-									PosDel.erase(PosDel.begin() + y);
-									y--;
-								}
-							}
-						}
-					}
-					for (int z = 0; z < PosDel.size(); z++)
-					{
-						Pieces[b]->AvailableMoves.erase(Pieces[b]->AvailableMoves.begin() + PosDel[z]);
-
-						for (int j = 0; j < PosDel.size(); j++)
-						{
-
-							PosDel[j] -= 1;
-						}
-					}
-					PosDel.clear();
-				}*/
-			}
+			DealWithCheck(CheckVaribles);
+			
 		}
 		for (int b = 0; b < Pieces.size(); b++)
 		{

@@ -1,8 +1,8 @@
-#include "HTTPRequest.hpp"
 #include <iostream>
 #include "json.hpp"
-#include "CreateGame.h"
+#include "Peices/PeicesMain.h"
 #include <fstream>
+
 
 using json = nlohmann::json;
 
@@ -14,12 +14,13 @@ public:
 
 	void CreateJSON(std::vector<Peices*> Peices);
 
-	void ReadJSON();
+	json ReadJSON();
 
 	void GetRequest();
 	void PostRequest();
 
-	//http::Request* request;
+	std::string URL;
+	std::string InviteID;
 
 private:
 
