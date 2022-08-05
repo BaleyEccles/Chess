@@ -657,7 +657,7 @@ namespace detail
 	};
 }//namespace detail
 
-	typedef unsigned int	uint;
+	typedef unsigned int uint;
 }//namespace glm
 
 ///////////////////////////////////////////////////////////////////////////////////

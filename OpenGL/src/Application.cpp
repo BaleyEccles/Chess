@@ -1,5 +1,7 @@
 // Include GLEW
 #pragma once
+#define WIN32_LEAN_AND_MEAN
+
 #include <GL/glew.h>
 
 // Include GLFW
@@ -26,9 +28,8 @@
 #include "RenderItem.h"
 #include "globals.cpp"
 #include "CreateGame.h"
+
 #include "Networking/Networking.h"
-
-
 GLFWwindow* InitWindow()
 {
     // Initialise GLFW

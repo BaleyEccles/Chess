@@ -3,11 +3,10 @@
 Networking::Networking()
 {
     std::cout << "please input the server url \n";
-        std::cin >> URL;
+    std::cin >> URL;
 
     std::cout << "please input the InviteID \n";
-        std::cin >> InviteID;
-
+    std::cin >> InviteID;
 
 }
 

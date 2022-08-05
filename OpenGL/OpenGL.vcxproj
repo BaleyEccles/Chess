@@ -129,7 +129,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(ProjectDir)\Dependencies\GLFW\lib-vc2019;$(ProjectDir)\Dependencies\glew-2.1.0\lib\Release\x64;$(ProjectDir)\Dependencies\freetype-windows-binaries-master\release static\vs2015-2022\win64</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;User32.lib;Gdi32.lib;Shell32.lib;glew32s.lib;freetype.lib;</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;User32.lib;Gdi32.lib;Shell32.lib;glew32s.lib;freetype.lib;Ws2_32.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -157,7 +157,11 @@
     <ClCompile Include="src\CreateGame.cpp" />
     <ClCompile Include="src\globals.cpp" />
     <ClCompile Include="src\IndexBuffer.cpp" />
+    <ClCompile Include="src\Networking\chess_networking.cpp" />
     <ClCompile Include="src\Networking\Networking.cpp" />
+    <ClCompile Include="src\Networking\_game\game.cpp" />
+    <ClCompile Include="src\Networking\_invite\invite.cpp" />
+    <ClCompile Include="src\Networking\_private\network_request.cpp" />
     <ClCompile Include="src\Peices\Bishop.cpp" />
     <ClCompile Include="src\Peices\King.cpp" />
     <ClCompile Include="src\Peices\Knight.cpp" />
@@ -241,8 +245,13 @@
     <ClInclude Include="src\CreateGame.h" />
     <ClInclude Include="src\IndexBuffer.h" />
     <ClInclude Include="src\Debug.h" />
+    <ClInclude Include="src\Networking\chess_networking.h" />
+    <ClInclude Include="src\Networking\HTTPRequest\include\HTTPRequest.hpp" />
     <ClInclude Include="src\Networking\json.hpp" />
     <ClInclude Include="src\Networking\Networking.h" />
+    <ClInclude Include="src\Networking\_game\game.h" />
+    <ClInclude Include="src\Networking\_invite\invite.h" />
+    <ClInclude Include="src\Networking\_private\network_request.h" />
     <ClInclude Include="src\Peices\PeicesMain.h" />
     <ClInclude Include="src\Peices\Pieces.h" />
     <ClInclude Include="src\Renderer.h" />
