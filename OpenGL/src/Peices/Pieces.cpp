@@ -202,14 +202,14 @@ bool Peices::CheckPosIsOccupied(glm::vec2 Pos)
     {
         if (floor(PeiceVecMain[i]->Game_Pos) == floor(Pos))
         {
-            if (PeiceVecMain[i]->Type == "King" && PeiceVecMain[i]->Colour != Colour)
+            /*if (PeiceVecMain[i]->Type == "King" && PeiceVecMain[i]->Colour != Colour)
             {
-                return false;
+                return false;           IDK Why this code was here, might break stuff
             }
             else
-            {
-                return true;
-            }
+            {*/
+            return true;
+            //}
         }
     }
     return false;

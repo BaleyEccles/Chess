@@ -71,80 +71,7 @@ void CreateGame::LoadData(std::vector<Peices*> Data)
 
 void CreateGame::DealWithCheck(CheckVaribles CheckVar)
 {
-	std::cout << "dsadas" << std::endl;
-	for (int b = 0; b < Pieces.size(); b++)
-	{
-		if (Pieces[b]->Type != "King" && Pieces[b]->Colour == CurrentMove)
-		{
-			for (int u = 0; u < Pieces[b]->AvailableMoves.size(); u++)
-			{
-				bool CanGo = false;
 
-				for (int g = 0; g < CheckVar.CheckMoves.size(); g++)
-				{
-					if (Pieces[b]->AvailableMoves[u] == CheckVar.CheckMoves[g])
-					{
-						CanGo = true;
-					}
-					else
-					{
-						if (!CanGo)
-						{
-							CanGo = false;
-						}
-					}
-				}
-				Pieces[b]->CanGo = CanGo;
-
-			}
-
-		}
-
-		for (int b = 0; b < Pieces.size(); b++)
-		{
-			std::vector<int> PosDel;
-
-			if (Pieces[b]->Type != "King" && Pieces[b]->Colour == CurrentMove && Pieces[b]->CanGo == true)
-			{
-				for (int g = 0; g < CheckVar.CheckMoves.size(); g++)
-				{
-					for (int u = 0; u < Pieces[b]->AvailableMoves.size(); u++)
-					{
-						if (CheckVar.CheckMoves[g] != Pieces[b]->AvailableMoves[u])
-						{
-							PosDel.push_back(u);
-
-						}
-					}
-				}
-			}
-			for (int h = 0; h < PosDel.size(); h++)
-			{
-				for (int y = 0; y < PosDel.size(); y++)
-				{
-					if (y != h)
-					{
-						if (PosDel[y] == PosDel[h])
-						{
-							PosDel.erase(PosDel.begin() + y);
-							y--;
-						}
-					}
-				}
-			}
-			for (int z = 0; z < PosDel.size(); z++)
-			{
-				Pieces[b]->AvailableMoves.erase(Pieces[b]->AvailableMoves.begin() + PosDel[z]);
-
-				for (int j = 0; j < PosDel.size(); j++)
-				{
-
-					PosDel[j] -= 1;
-				}
-			}
-			PosDel.clear();
-		}
-	}
 }
 
 void CreateGame::Main()
@@ -162,13 +89,8 @@ void CreateGame::Main()
 			Pieces[i]->CanGo = false;
 		}
 
-		CheckVaribles CheckVaribles = CheckIfInCheck();
 
-		if (CheckVaribles.IsInCheck)
-		{
-			DealWithCheck(CheckVaribles);
-			
-		}
+		/*
 		for (int b = 0; b < Pieces.size(); b++)
 		{
 			if (Pieces[b]->Type == "King" && Pieces[b]->Colour == CurrentMove)
@@ -195,7 +117,7 @@ void CreateGame::Main()
 					}
 				}
 
-				/*
+				
 				for (int z = 0; z < PosDel.size(); z++)
 				{
 					Pieces[b]->AvailableMoves.erase(Pieces[b]->AvailableMoves.begin() + PosDel[z]);
@@ -206,11 +128,11 @@ void CreateGame::Main()
 						PosDel[j] -= 1;
 					}
 				}
-				PosDel.clear();*/
+				PosDel.clear();
 
 			}
 		}
-		
+		*/
 		Pieces[i]->Main(Pieces);
 
 		if (Pieces[i]->HasMoved == true)
@@ -221,6 +143,13 @@ void CreateGame::Main()
 			for (int k = 0; k < Pieces.size(); k++)
 			{
 				Pieces[k]->UpdateAvailableMoves();
+			}
+			CheckVaribles CheckVaribles = CheckIfInCheck();
+
+			if (CheckVaribles.IsInCheck)
+			{
+				DealWithCheck(CheckVaribles);
+
 			}
 			SwapSide();
 		}
@@ -263,6 +192,8 @@ CheckVaribles CreateGame::CheckIfInCheck()
 
 					// White is in check
 					CheckVariblesMain.IsInCheck = true;
+					std::cout << "white" << std::endl;
+
 				}
 			}
 		}
@@ -276,6 +207,7 @@ CheckVaribles CreateGame::CheckIfInCheck()
 					CheckVariblesMain.CheckMoves = Pieces[l]->AvailableMoves;
 					// Black is in check
 					CheckVariblesMain.IsInCheck = true;
+					std::cout << "dsadas" << std::endl;
 				}
 			}
 		}

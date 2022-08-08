@@ -19,12 +19,14 @@ public:
 
 	void GetRequest();
 	void PostRequest();
+	std::string Join_Create;
 
 	std::string URL;
-	std::string InviteID;
+	std::pair<unsigned int, unsigned int> InviteID;
+	unsigned int InviteID_get;
+	Invite InviteMain;
 
 private:
-
 
 
 
