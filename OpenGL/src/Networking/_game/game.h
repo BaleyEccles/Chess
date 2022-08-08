@@ -8,17 +8,15 @@
 #include "../chess_networking.h"
 #include "../_private/network_request.h"
 
-struct Game {
-
+class Game {
+public:
     std::string game_id;
 
     std::string server_url;
 
-    void fetch_game();
+    std::string fetch_game() const;
 
-    void create_game();
-
-    void save_game();
+    unsigned int save_game(std::string json) const;
 
     unsigned int quit_game(unsigned int server_url) const;
 };

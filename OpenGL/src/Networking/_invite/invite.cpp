@@ -1,11 +1,18 @@
 //
 // Created by Skyla on 27/7/2022.
 //
+
 #include "invite.h"
+#ifdef __linux__
+#include <unistd.h> 
+#define SLEEP sleep(1)
+#else 
+#include <Windows.h>
+#define SLEEP Sleep(1000)
+#endif
 
 std::pair<std::string, unsigned int> Invite::fetch_invite(unsigned int invite_id) const {
 	const std::string url = server_url + "invite/" + std::to_string(invite_id);
-
 	try {
 		return network_request(Method::GET, url);
 
@@ -44,14 +51,19 @@ unsigned int Invite::delete_invite(unsigned int invite_id) const {
 std::string Invite::check_for_partner(unsigned int invite_id) const {
 	const std::string url = server_url + "invite/" + std::to_string(invite_id);
 
+	std::cout << "Waiting for partner..." << std::endl;
+
 	while (true) {
 		try {
 			std::pair<std::string, unsigned int> results = network_request(Method::PUT, url);
-			return results.first;
+			if (results.second == 200) {
+				return results.first;
+			}
 
 		} catch (const std::exception& e) {
 			std::cerr << "Request failed, error: " << e.what() << '\n';
 			throw e;
 		}
+		SLEEP;
 	}
 }

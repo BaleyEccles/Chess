@@ -66,7 +66,6 @@ CreateGame::CreateGame()
 void CreateGame::LoadData(std::vector<Peices*> Data)
 {
 	Pieces = Data;
-	
 }
 
 void CreateGame::DealWithCheck(CheckVaribles CheckVar)

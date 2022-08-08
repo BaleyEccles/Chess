@@ -1,6 +1,7 @@
 //
 // Created by Skyla on 27/7/2022.
 //
+
 #ifndef CHESSNETWORKING_INVITE_H
 #define CHESSNETWORKING_INVITE_H
 
