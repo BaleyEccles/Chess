@@ -78,7 +78,7 @@ void CreateGame::Main()
 {
 	//LoadData();
 	RemoveDeadPiece();
-	for (int i = 0; i < Pieces.size(); i++)
+	for (int i = 0; i < Pieces.size(); i++)//
 	{
 		if (CurrentMove == Pieces[i]->Colour)
 		{
