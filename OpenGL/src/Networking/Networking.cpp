@@ -5,7 +5,7 @@ Networking::Networking()
     
     //std::cout << "please input the server url \n";
     //std::cin >> URL;
-    /*
+    
     InviteMain.server_url = "http://test/";
     bool is_jc = true;
     while (is_jc)
@@ -34,7 +34,7 @@ Networking::Networking()
 
     }
     InviteMain.check_for_partner(InviteID_get);
-    */
+    
 
 }
 
