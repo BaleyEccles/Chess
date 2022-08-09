@@ -5,35 +5,40 @@ Networking::Networking()
     
     //std::cout << "please input the server url \n";
     //std::cin >> URL;
-    
-    InviteMain.server_url = "http://test/";
-    bool is_jc = true;
-    while (is_jc)
+    std::string self_or_network = "s";
+    std::cout << "Would you like to play localy or though the network (l or n)\n";
+    std::cin >> self_or_network;
+    if (self_or_network == "n")
     {
-        std::cout << "Join or Create Game. (j or c)\n";
-        std::cin >> Join_Create;
-        if (Join_Create == "c")
+        InviteMain.server_url = "http://test/";
+        bool is_jc = true;
+        while (is_jc)
         {
-            InviteID = InviteMain.create_invite();
-            std::cout << "Your invite Code is: " + InviteID.first << std::endl;
-            InviteID_get = InviteID.first;
-            is_jc = false;
-        }
-        if (Join_Create == "j")
-        {
-            std::cout << "Input the invite ID:" << std::endl;
-            std::cin >> InviteID_get;
-            InviteMain.fetch_invite(InviteID_get);
-            is_jc = false;
+            std::cout << "Join or Create Game. (j or c)\n";
+            std::cin >> Join_Create;
+            if (Join_Create == "c")
+            {
+                InviteID = InviteMain.create_invite();
+                std::cout << "Your invite Code is: " + InviteID.first << std::endl;
+                InviteID_get = InviteID.first;
+                is_jc = false;
+            }
+            if (Join_Create == "j")
+            {
+                std::cout << "Input the invite ID:" << std::endl;
+                std::cin >> InviteID_get;
+                InviteMain.fetch_invite(InviteID_get);
+                is_jc = false;
+
+            }
+            if (Join_Create != "c" || "j")
+            {
+                is_jc = true;
+            }
 
         }
-        if (Join_Create != "c" || "j")
-        {
-            is_jc = true;
-        }
-
+        InviteMain.check_for_partner(InviteID_get);
     }
-    InviteMain.check_for_partner(InviteID_get);
     
 
 }

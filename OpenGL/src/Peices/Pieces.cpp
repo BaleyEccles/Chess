@@ -168,7 +168,7 @@ void Peices::SetPosToCell()
 {
     if (CheckMove(floor(position)))
     {
-        position = floor(position); // add a func that highlights the cell its going into
+        position = floor(position);
         Game_Pos = position;
         HasMoved = true;
         CheckTakePeice();
@@ -204,7 +204,7 @@ bool Peices::CheckPosIsOccupied(glm::vec2 Pos)
         {
             /*if (PeiceVecMain[i]->Type == "King" && PeiceVecMain[i]->Colour != Colour)
             {
-                return false;           IDK Why this code was here, might break stuff
+                return false;
             }
             else
             {*/

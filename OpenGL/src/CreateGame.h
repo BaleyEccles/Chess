@@ -10,7 +10,7 @@
 
 struct CheckVaribles{
 	bool IsInCheck = false;
-	std::vector<glm::vec2> CheckMoves;
+	std::vector<glm::vec2> CheckMoves;// moves that may have caused check
 };
 
 
