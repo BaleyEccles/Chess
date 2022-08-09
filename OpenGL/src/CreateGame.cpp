@@ -136,7 +136,7 @@ void CreateGame::Main()
 
 		if (Pieces[i]->HasMoved == true)
 		{
-			
+
 
 			//std::cout << i << std::endl;
 			for (int k = 0; k < Pieces.size(); k++)
@@ -150,6 +150,10 @@ void CreateGame::Main()
 				DealWithCheck(CheckVaribles);
 
 			}
+			CheckPromotion();
+			
+			MoveNumber += 1;
+			std::cout << MoveNumber << std::endl;
 			SwapSide();
 		}
 		Pieces[i]->HasMoved = false;
@@ -298,6 +302,53 @@ void CreateGame::RemoveDeadPiece()
 		{
 			PosDel[j] -= 1;
 		}
+	}
+}
+
+void CreateGame::CheckPromotion()
+{// promote to queen
+	bool CheckPromo = false;
+	for (int p = 0; p < Pieces.size(); p++)
+	{
+		if (Pieces[p]->Type == "Pawn" && (Pieces[p]->Game_Pos.y == 0.0f || Pieces[p]->Game_Pos.y == 7.0f))
+		{
+			CheckPromo = true;
+		}
+	}
+	if (CheckPromo)
+	{
+		bool WhitePromo = false;
+		bool BlackPromo = false;
+		Queen* QueenWhite = new Queen(glm::vec2(-10.0f, -10.0f), "WHITE");
+		Queen* QueenBlack = new Queen(glm::vec2(-10.0f, -10.0f), "BLACK");
+
+		for (int l = 0; l < Pieces.size(); l++)
+		{
+			if (Pieces[l]->Game_Pos.y == 7.0f && Pieces[l]->Colour == "WHITE" && Pieces[l]->Type == "Pawn")
+			{ 
+				Pieces[l]->IsDead = true;
+				QueenWhite->Game_Pos = Pieces[l]->Game_Pos;
+				WhitePromo = true;
+			}
+			if (Pieces[l]->Game_Pos.y == 0.0f && Pieces[l]->Colour == "BLACK" && Pieces[l]->Type == "Pawn")
+			{
+				Pieces[l]->IsDead = true;
+				QueenBlack->Game_Pos = Pieces[l]->Game_Pos;
+				BlackPromo = true;
+			}
+		}
+		if (WhitePromo == true)
+		{
+			Pieces.push_back(QueenWhite);
+			CurrentMove = "BLACK";
+		}
+		if (BlackPromo == true)
+		{
+			Pieces.push_back(QueenBlack);
+			CurrentMove = "WHITE";
+		}
+		std::cout << "asdashgkklhjkhj" << std::endl;
+		RemoveDeadPiece();
 	}
 }
 

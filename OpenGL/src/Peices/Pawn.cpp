@@ -36,9 +36,11 @@ void Pawn::GetAvalibleMoves()
             {
                 if (PeiceVecMain[l]->Game_Pos == (*this).Game_Pos)
                 {
-                    /*
+                    (this)->IsDead = true;
                     Queen* Queen1 = new Queen((*this).Game_Pos, "BLACK");
-                    (*this) = Queen1;*/
+
+                    PeiceVecMain.push_back(Queen1);
+
                     break;
                 }
             }
@@ -71,9 +73,10 @@ void Pawn::GetAvalibleMoves()
             {
                 if (PeiceVecMain[l]->Game_Pos == (*this).Game_Pos)
                 {
-                    /*
+                    (this)->IsDead = true;
                     Queen* Queen1 = new Queen((*this).Game_Pos, "WHITE");
-                    (*this) = Queen1;*/
+                    PeiceVecMain.push_back(Queen1);
+
                     break;
 
                 }

@@ -37,6 +37,10 @@ public:
 	void RestartGame();
 
 	void RemoveDeadPiece();
+	int MoveNumber = -32;
+
+	void CheckPromotion();
+
 private:
 
 
