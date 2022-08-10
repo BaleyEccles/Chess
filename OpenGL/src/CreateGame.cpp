@@ -73,6 +73,7 @@ void CreateGame::DealWithCheck(CheckVaribles CheckVar)
 	// itterate through lines from king pos and check if it hits the checking peice, if so then ONLY include those moves
 	// exclude if peice type is knight
 	//
+	// if have time add en passent and castling
 }
 
 void CreateGame::Main()
