@@ -69,8 +69,10 @@ void CreateGame::LoadData(std::vector<Peices*> Data)
 }
 
 void CreateGame::DealWithCheck(CheckVaribles CheckVar)
-{
-
+{// can only be direct line from king, excluding knight
+	// itterate through lines from king pos and check if it hits the checking peice, if so then ONLY include those moves
+	// exclude if peice type is knight
+	//
 }
 
 void CreateGame::Main()
@@ -168,6 +170,8 @@ CheckVaribles CreateGame::CheckIfInCheck()
 
 	glm::vec2 KingWPos;
 	glm::vec2 KingBPos;
+	int KingWVecPos;
+	int KingBVecPos;
 	for (int k = 0; k < Pieces.size(); k++)
 	{
 		if (Pieces[k]->Type == "King")
@@ -175,10 +179,12 @@ CheckVaribles CreateGame::CheckIfInCheck()
 			if (Pieces[k]->Colour == "BLACK")
 			{
 				KingBPos = Pieces[k]->Game_Pos;
+				KingBVecPos = k;
 			}
 			if (Pieces[k]->Colour == "WHITE")
 			{
 				KingWPos = Pieces[k]->Game_Pos;
+				KingWVecPos = k;
 			}
 		}
 	}
@@ -190,11 +196,18 @@ CheckVaribles CreateGame::CheckIfInCheck()
 			{
 				if (Pieces[l]->AvailableMoves[i] == KingWPos)
 				{
-					Pieces[l]->GetAvalibleMoves();
-					CheckVariblesMain.CheckMoves = Pieces[l]->AvailableMoves;
-
 					// White is in check
 					CheckVariblesMain.IsInCheck = true;
+					CheckVariblesMain.ColourInCheck = "WHITE";
+
+					CheckVariblesMain.KingPos = KingWPos;
+					CheckVariblesMain.KingVecPos = KingWVecPos;
+
+					CheckVariblesMain.CheckPiecePos = Pieces[l]->Game_Pos;
+					CheckVariblesMain.CheckPieceVecPos = l;
+					CheckVariblesMain.CheckPieceType = Pieces[l]->Type;
+
+
 					std::cout << "white" << std::endl;
 
 				}
@@ -206,11 +219,16 @@ CheckVaribles CreateGame::CheckIfInCheck()
 			{
 				if (Pieces[l]->AvailableMoves[i] == KingBPos)
 				{
-					Pieces[l]->GetAvalibleMoves();
-					CheckVariblesMain.CheckMoves = Pieces[l]->AvailableMoves;
 					// Black is in check
 					CheckVariblesMain.IsInCheck = true;
-					std::cout << "dsadas" << std::endl;
+					CheckVariblesMain.ColourInCheck = "BLACK";
+
+					CheckVariblesMain.KingPos = KingBPos;
+					CheckVariblesMain.KingVecPos = KingBVecPos;
+
+					CheckVariblesMain.CheckPiecePos = Pieces[l]->Game_Pos;
+					CheckVariblesMain.CheckPieceVecPos = l;
+					CheckVariblesMain.CheckPieceType = Pieces[l]->Type;
 				}
 			}
 		}
