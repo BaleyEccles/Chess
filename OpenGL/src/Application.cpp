@@ -109,7 +109,7 @@ int main(void)
         glDepthFunc(GL_LEQUAL);
         glDepthRange(0.0f, 1.0f);
 
-        Board BoardMain(glm::vec4(0.1f, 0.3f, 0.7f, 1.0f), glm::vec4(0.3f, 0.2f, 1.0f, 1.0f));
+        Board BoardMain(glm::vec4(0.9f, 0.1f, 0.2f, 1.0f), glm::vec4(0.2f, 0.6f, 0.1f, 1.0f));
 
         CreateGame Game;
 

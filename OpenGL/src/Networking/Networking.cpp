@@ -10,7 +10,7 @@ Networking::Networking()
     std::cin >> self_or_network;
     if (self_or_network == "n")
     {
-        InviteMain.server_url = "http://test/";
+        InviteMain.server_url = "http://api.alessian.org/";
         bool is_jc = true;
         while (is_jc)
         {
