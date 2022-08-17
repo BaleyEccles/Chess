@@ -2,11 +2,11 @@
 #pragma once
 #include "vendor/glm/glm.hpp"
 #include "globals.cpp"
-#include <vector>
 #include "RenderItem.h"
 //#include <Windows.h>
 #include <cmath>
 #include "Peices/PeicesMain.h"
+#include <vector>
 
 struct CheckVaribles{
 	bool IsInCheck = false;
@@ -46,6 +46,8 @@ public:
 	int MoveNumber = -32;
 
 	void CheckPromotion();
+
+	bool IsInVec(glm::vec2 i, glm::vec2 pos);
 
 private:
 

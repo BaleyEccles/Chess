@@ -13,7 +13,7 @@ std::pair<std::string, unsigned int> network_request(std::string method, std::st
         const auto response = request.send(method);
         const std::string response_text = {response.body.begin(), response.body.end()};
 
-//        std::cout << response_text;
+        std::cout << response_text;
         return {response_text, response.status.code};
 
     } catch (const std::exception& e) {

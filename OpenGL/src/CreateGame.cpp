@@ -74,7 +74,181 @@ void CreateGame::DealWithCheck(CheckVaribles CheckVar)
 	// exclude if peice type is knight
 	//
 	// if have time add en passent and castling
+	// gets loc of check peice
+	std::vector<glm::vec2> AvailibleMoves;
+	bool ShouldCheckLoc = true;
+	std::cout << "dsaad" << std::endl;
+	if (CheckVar.CheckPieceType != "Knight")
+	{
+		
+		glm::vec2 PeiceRelTo00 = CheckVar.KingPos - CheckVar.CheckPiecePos;
+		if (PeiceRelTo00.x == 0.0f && PeiceRelTo00.y < 0.0f)
+		{// is down
+			for (int h = 0; h < 20; h++)
+			{
+
+				if (ShouldCheckLoc)
+				{
+					AvailibleMoves.push_back(glm::vec2(CheckVar.KingPos.x, CheckVar.KingPos.y + (float)h));
+					if (glm::vec2(CheckVar.KingPos.x, CheckVar.KingPos.y + (float)h) == CheckVar.CheckPiecePos)
+					{
+						ShouldCheckLoc = false;
+					}
+				}
+			}
+		}
+		if (PeiceRelTo00.x == 0.0f && PeiceRelTo00.y > 0.0f)
+		{// is up
+			for (int h = 0; h < 20; h++)
+			{
+
+				if (ShouldCheckLoc)
+				{
+					AvailibleMoves.push_back(glm::vec2(CheckVar.KingPos.x, CheckVar.KingPos.y - (float)h));
+					if (glm::vec2(CheckVar.KingPos.x, CheckVar.KingPos.y - (float)h) == CheckVar.CheckPiecePos)
+					{
+						ShouldCheckLoc = false;
+					}
+				}
+			}
+		}
+		if (PeiceRelTo00.x < 0.0f && PeiceRelTo00.y == 0.0f)
+		{// is left
+			for (int h = 0; h < 20; h++)
+			{
+
+				if (ShouldCheckLoc)
+				{
+					AvailibleMoves.push_back(glm::vec2(CheckVar.KingPos.x + (float)h, CheckVar.KingPos.y));
+					if (glm::vec2(CheckVar.KingPos.x + (float)h, CheckVar.KingPos.y) == CheckVar.CheckPiecePos)
+					{
+						ShouldCheckLoc = false;
+					}
+				}
+			}
+		}
+		if (PeiceRelTo00.x > 0.0f && PeiceRelTo00.y == 0.0f)
+		{// is right
+			for (int h = 0; h < 20; h++)
+			{
+
+				if (ShouldCheckLoc)
+				{
+					AvailibleMoves.push_back(glm::vec2(CheckVar.KingPos.x - (float)h, CheckVar.KingPos.y));
+					if (glm::vec2(CheckVar.KingPos.x - (float)h, CheckVar.KingPos.y) == CheckVar.CheckPiecePos)
+					{
+						ShouldCheckLoc = false;
+					}
+				}
+			}
+		}
+
+		if (PeiceRelTo00.x > 0.0f && PeiceRelTo00.y > 0.0f)
+		{// is up right
+			for (int h = 0; h < 20; h++)
+			{
+				if (ShouldCheckLoc)
+				{
+
+					AvailibleMoves.push_back(glm::vec2(CheckVar.KingPos.x - (float)h, CheckVar.KingPos.y - (float)h));
+					if (glm::vec2(CheckVar.KingPos.x - (float)h, CheckVar.KingPos.y - (float)h) == CheckVar.CheckPiecePos)
+					{
+						ShouldCheckLoc = false;
+					}
+				}
+			}
+		}
+		if (PeiceRelTo00.x > 0.0f && PeiceRelTo00.y < 0.0f)
+		{// is down right
+			for (int h = 0; h < 20; h++)
+			{
+				if (ShouldCheckLoc)
+				{
+
+					AvailibleMoves.push_back(glm::vec2(CheckVar.KingPos.x - (float)h, CheckVar.KingPos.y + (float)h));
+					if (glm::vec2(CheckVar.KingPos.x - (float)h, CheckVar.KingPos.y + (float)h) == CheckVar.CheckPiecePos)
+					{
+						ShouldCheckLoc = false;
+					}
+				}
+			}
+		}
+		if (PeiceRelTo00.x < 0.0f && PeiceRelTo00.y < 0.0f)
+		{// is down left
+			for (int h = 0; h < 20; h++)
+			{
+
+				if (ShouldCheckLoc)
+				{
+					AvailibleMoves.push_back(glm::vec2(CheckVar.KingPos.x + (float)h, CheckVar.KingPos.y + (float)h));
+					if (glm::vec2(CheckVar.KingPos.x + (float)h, CheckVar.KingPos.y + (float)h) == CheckVar.CheckPiecePos)
+					{
+						ShouldCheckLoc = false;
+					}
+				}
+			}
+		}
+		if (PeiceRelTo00.x < 0.0f && PeiceRelTo00.y > 0.0f)
+		{// is up left
+			for (int h = 0; h < 20; h++)
+			{
+
+				if (ShouldCheckLoc)
+				{
+					AvailibleMoves.push_back(glm::vec2(CheckVar.KingPos.x + (float)h, CheckVar.KingPos.y - (float)h));
+					if (glm::vec2(CheckVar.KingPos.x + (float)h, CheckVar.KingPos.y - (float)h) == CheckVar.CheckPiecePos)
+					{
+						ShouldCheckLoc = false;
+					}
+				}
+			}
+		}
+	}
+	else {
+		AvailibleMoves.push_back(CheckVar.CheckPiecePos);
+	}
+
+
+	for (int v = 0; v < Pieces.size(); v++)
+	{
+		if (Pieces[v]->Colour != CurrentMove)
+		{
+			std::vector<bool> LocToRemove(Pieces[v]->AvailableMoves.size());
+			std::fill(LocToRemove.begin(), LocToRemove.end(), false);
+			for (int l = 0; l < Pieces[v]->AvailableMoves.size(); l++)
+			{
+				for (int j = 0; j < AvailibleMoves.size(); j++)
+				{
+					if (Pieces[v]->AvailableMoves[l] == AvailibleMoves[j])
+					{
+						LocToRemove[l] = true;
+					}
+
+				}
+			}
+
+			// removes location that the peice cant move to 
+			for (int u = 0; u < LocToRemove.size(); u++)
+			{
+
+				if (LocToRemove[u] == false && Pieces[v]->Type != "King")
+				{
+					Pieces[v]->AvailableMoves[u] = glm::vec2(-100.0f, -150.0f);
+				}
+				if (LocToRemove[u] == true && Pieces[v]->Type == "King")
+				{
+					Pieces[v]->AvailableMoves[u] = glm::vec2(-100.0f, -150.0f);
+				}
+			}
+		}
+	}
+
 }
+
+
+
+
+
 
 void CreateGame::Main()
 {
@@ -91,56 +265,10 @@ void CreateGame::Main()
 			Pieces[i]->CanGo = false;
 		}
 
-
-		/*
-		for (int b = 0; b < Pieces.size(); b++)
-		{
-			if (Pieces[b]->Type == "King" && Pieces[b]->Colour == CurrentMove)
-			{
-				std::vector<int> PosDel;
-
-				for (int p = 0; p < Pieces[b]->AvailableMoves.size(); p++)
-				{
-					for (int a = 0; a < Pieces.size(); a++)
-					{
-						if (Pieces[a]->Colour != CurrentMove)
-						{
-							if (Pieces[b] != Pieces[a])
-							{
-								for (int k = 0; k < Pieces[a]->AvailableMoves.size(); k++)
-								{
-									if (Pieces[a]->AvailableMoves[k] == Pieces[b]->AvailableMoves[p])
-									{
-										PosDel.push_back(p);
-									}
-								}
-							}
-						}
-					}
-				}
-
-				
-				for (int z = 0; z < PosDel.size(); z++)
-				{
-					Pieces[b]->AvailableMoves.erase(Pieces[b]->AvailableMoves.begin() + PosDel[z]);
-
-					for (int j = 0; j < PosDel.size(); j++)
-					{
-
-						PosDel[j] -= 1;
-					}
-				}
-				PosDel.clear();
-
-			}
-		}
-		*/
 		Pieces[i]->Main(Pieces);
 
 		if (Pieces[i]->HasMoved == true)
 		{
-
-
 			//std::cout << i << std::endl;
 			for (int k = 0; k < Pieces.size(); k++)
 			{
@@ -151,13 +279,14 @@ void CreateGame::Main()
 			if (CheckVaribles.IsInCheck)
 			{
 				DealWithCheck(CheckVaribles);
-
+				CheckVaribles.IsInCheck = false;
 			}
 			CheckPromotion();
-			
+
 			MoveNumber += 1;
-			std::cout << MoveNumber << std::endl;
+			//std::cout << MoveNumber << std::endl;
 			SwapSide();
+
 		}
 		Pieces[i]->HasMoved = false;
 	}
@@ -191,7 +320,7 @@ CheckVaribles CreateGame::CheckIfInCheck()
 	}
 	for (int l = 0; l < Pieces.size(); l++)
 	{
-		if (Pieces[l]->Type != "King" && Pieces[l]->Colour == "BLACK")
+		if (Pieces[l]->Type != "King" && Pieces[l]->Colour == "BLACK" && Pieces[l]->IsDead == false)
 		{
 			for (int i = 0; i < Pieces[l]->AvailableMoves.size(); i++)
 			{
@@ -214,7 +343,7 @@ CheckVaribles CreateGame::CheckIfInCheck()
 				}
 			}
 		}
-		if (Pieces[l]->Type != "King" && Pieces[l]->Colour == "WHITE")
+		if (Pieces[l]->Type != "King" && Pieces[l]->Colour == "WHITE" && Pieces[l]->IsDead == false)
 		{
 			for (int i = 0; i < Pieces[l]->AvailableMoves.size(); i++)
 			{

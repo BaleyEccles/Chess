@@ -153,8 +153,8 @@ int main(void)
 
             BoardMain.RenderBoard();
             Game.Main();
-            NetworkingMain.CreateJSON(Game.Pieces);
-            NetworkingMain.PostRequest();
+            //NetworkingMain.CreateJSON(Game.Pieces);
+            //NetworkingMain.PostRequest();
             // Swap buffers
             glfwSwapBuffers(window);
             glfwPollEvents();
