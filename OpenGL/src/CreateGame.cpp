@@ -1,6 +1,7 @@
 #include "CreateGame.h"
 
 CreateGame::CreateGame()
+	:TextMain()
 {
 
 	std::vector<Pawn*> Pawns;
@@ -77,7 +78,6 @@ void CreateGame::DealWithCheck(CheckVaribles CheckVar)
 	// gets loc of check peice
 	std::vector<glm::vec2> AvailibleMoves;
 	bool ShouldCheckLoc = true;
-	std::cout << "dsaad" << std::endl;
 	if (CheckVar.CheckPieceType != "Knight")
 	{
 		
@@ -86,7 +86,6 @@ void CreateGame::DealWithCheck(CheckVaribles CheckVar)
 		{// is down
 			for (int h = 0; h < 20; h++)
 			{
-
 				if (ShouldCheckLoc)
 				{
 					AvailibleMoves.push_back(glm::vec2(CheckVar.KingPos.x, CheckVar.KingPos.y + (float)h));
@@ -129,6 +128,7 @@ void CreateGame::DealWithCheck(CheckVaribles CheckVar)
 		}
 		if (PeiceRelTo00.x > 0.0f && PeiceRelTo00.y == 0.0f)
 		{// is right
+
 			for (int h = 0; h < 20; h++)
 			{
 
@@ -145,6 +145,7 @@ void CreateGame::DealWithCheck(CheckVaribles CheckVar)
 
 		if (PeiceRelTo00.x > 0.0f && PeiceRelTo00.y > 0.0f)
 		{// is up right
+
 			for (int h = 0; h < 20; h++)
 			{
 				if (ShouldCheckLoc)
@@ -160,6 +161,7 @@ void CreateGame::DealWithCheck(CheckVaribles CheckVar)
 		}
 		if (PeiceRelTo00.x > 0.0f && PeiceRelTo00.y < 0.0f)
 		{// is down right
+
 			for (int h = 0; h < 20; h++)
 			{
 				if (ShouldCheckLoc)
@@ -175,6 +177,7 @@ void CreateGame::DealWithCheck(CheckVaribles CheckVar)
 		}
 		if (PeiceRelTo00.x < 0.0f && PeiceRelTo00.y < 0.0f)
 		{// is down left
+
 			for (int h = 0; h < 20; h++)
 			{
 
@@ -190,6 +193,7 @@ void CreateGame::DealWithCheck(CheckVaribles CheckVar)
 		}
 		if (PeiceRelTo00.x < 0.0f && PeiceRelTo00.y > 0.0f)
 		{// is up left
+
 			for (int h = 0; h < 20; h++)
 			{
 
@@ -230,15 +234,24 @@ void CreateGame::DealWithCheck(CheckVaribles CheckVar)
 			// removes location that the peice cant move to 
 			for (int u = 0; u < LocToRemove.size(); u++)
 			{
-
 				if (LocToRemove[u] == false && Pieces[v]->Type != "King")
 				{
 					Pieces[v]->AvailableMoves[u] = glm::vec2(-100.0f, -150.0f);
 				}
-				if (LocToRemove[u] == true && Pieces[v]->Type == "King")
-				{
-					Pieces[v]->AvailableMoves[u] = glm::vec2(-100.0f, -150.0f);
-				}
+
+			}
+			if (Pieces[v]->Type == "King")
+			{
+				Pieces[v]->AvailableMoves.clear();
+				Pieces[v]->AvailableMoves.push_back(glm::vec2(Pieces[v]->Game_Pos.x + 1.0f, Pieces[v]->Game_Pos.y + 1.0f));
+				Pieces[v]->AvailableMoves.push_back(glm::vec2(Pieces[v]->Game_Pos.x - 1.0f, Pieces[v]->Game_Pos.y - 1.0f));
+				Pieces[v]->AvailableMoves.push_back(glm::vec2(Pieces[v]->Game_Pos.x - 1.0f, Pieces[v]->Game_Pos.y + 1.0f));
+				Pieces[v]->AvailableMoves.push_back(glm::vec2(Pieces[v]->Game_Pos.x + 1.0f, Pieces[v]->Game_Pos.y - 1.0f));
+				Pieces[v]->AvailableMoves.push_back(glm::vec2(Pieces[v]->Game_Pos.x + 1.0f, Pieces[v]->Game_Pos.y));
+				Pieces[v]->AvailableMoves.push_back(glm::vec2(Pieces[v]->Game_Pos.x - 1.0f, Pieces[v]->Game_Pos.y));
+				Pieces[v]->AvailableMoves.push_back(glm::vec2(Pieces[v]->Game_Pos.x, Pieces[v]->Game_Pos.y + 1.0f));
+				Pieces[v]->AvailableMoves.push_back(glm::vec2(Pieces[v]->Game_Pos.x, Pieces[v]->Game_Pos.y - 1.0f));
+				Pieces[v]->RemoveSamePeice();
 			}
 		}
 	}
@@ -252,6 +265,8 @@ void CreateGame::DealWithCheck(CheckVaribles CheckVar)
 
 void CreateGame::Main()
 {
+	DeadScreen();
+
 	//LoadData();
 	RemoveDeadPiece();
 	for (int i = 0; i < Pieces.size(); i++)
@@ -290,6 +305,7 @@ void CreateGame::Main()
 		}
 		Pieces[i]->HasMoved = false;
 	}
+
 	RestartGame();
 
 }
@@ -338,7 +354,6 @@ CheckVaribles CreateGame::CheckIfInCheck()
 					CheckVariblesMain.CheckPieceType = Pieces[l]->Type;
 
 
-					std::cout << "white" << std::endl;
 
 				}
 			}
@@ -371,7 +386,12 @@ void CreateGame::RestartGame()
 {
 	if (GetKeyState('R') < 0)
 	{
+		Winner.GameIsDone = false;
 		// massive memory leak, cant delete the data in the vector
+		//for (int b = 0; b < Pieces.size(); b++)
+		//{
+		//	delete Pieces[b];
+		//}
 		Pieces.clear();
 		std::vector<Pawn*> Pawns;
 		for (int i = 0; i < 16; ++i)
@@ -495,8 +515,39 @@ void CreateGame::CheckPromotion()
 			Pieces.push_back(QueenBlack);
 			CurrentMove = "WHITE";
 		}
-		std::cout << "asdashgkklhjkhj" << std::endl;
 		RemoveDeadPiece();
+	}
+}
+
+void CreateGame::DeadScreen()
+{
+	int NumberOfKings = 0;
+	for (int i = 0; i < Pieces.size(); i++)
+	{
+		if (Pieces[i]->Type == "King")
+		{
+			NumberOfKings += 1;
+		}
+	}
+	if (NumberOfKings != 2)
+	{
+		Winner.GameIsDone = true;
+		if (CurrentMove == "BLACK")
+		{
+			Winner.Text = "The Winner is White";
+		}
+		if (CurrentMove == "WHITE")
+		{
+			Winner.Text = "The Winner is Black";
+		}
+	}
+
+	if (Winner.GameIsDone == true)
+	{
+		float r = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+		float g = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+		float b = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+		TextMain.RenderText(Winner.Text, 5.0f, 50.0f, 0.2f, glm::vec3(r, g, b));
 	}
 }
 

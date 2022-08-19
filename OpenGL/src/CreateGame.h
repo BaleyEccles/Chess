@@ -7,8 +7,10 @@
 #include <cmath>
 #include "Peices/PeicesMain.h"
 #include <vector>
+#include "Text.h"
 
-struct CheckVaribles{
+
+struct CheckVaribles {
 	bool IsInCheck = false;
 	std::string ColourInCheck;
 	int KingVecPos;
@@ -19,6 +21,12 @@ struct CheckVaribles{
 	std::string CheckPieceType;
 };
 
+struct HasWon {
+	std::string Text;
+	bool GameIsDone = false;
+
+
+};
 
 class CreateGame
 {
@@ -48,6 +56,12 @@ public:
 	void CheckPromotion();
 
 	bool IsInVec(glm::vec2 i, glm::vec2 pos);
+
+	text TextMain;
+	
+	HasWon Winner;
+
+	void DeadScreen();
 
 private:
 

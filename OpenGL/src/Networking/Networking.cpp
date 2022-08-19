@@ -2,7 +2,7 @@
 
 Networking::Networking()
 {
-    
+    /*
     //std::cout << "please input the server url \n";
     //std::cin >> URL;
     std::string self_or_network = "s";
@@ -86,10 +86,10 @@ Networking::Networking()
                 is_jc = true;
             }
 
-        }*/
+        }
         //InviteMain.check_for_partner(InviteID_get);
     }
-
+    */
 }
 
 

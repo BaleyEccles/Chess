@@ -23,7 +23,7 @@
 #include <random>
 #include <math.h>
 #include <fstream>
-#include "Text.h"
+//#include "Text.h"
 #include "Board.h"
 #include "RenderItem.h"
 #include "globals.cpp"
@@ -91,9 +91,9 @@ int main(void)
 
 
     MoveWindow(hWnd_Game, 0, -25, Windowx, Windowy + 56, TRUE);
-    ShowWindow(hWnd_Game, SHOW_FULLSCREEN);
+    //ShowWindow(hWnd_Game, SHOW_FULLSCREEN);
     {
-        Networking NetworkingMain;
+        //Networking NetworkingMain;
 
         GLCall(glEnable(GL_BLEND));
         GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
