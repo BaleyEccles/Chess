@@ -70,12 +70,7 @@ void CreateGame::LoadData(std::vector<Peices*> Data)
 }
 
 void CreateGame::DealWithCheck(CheckVaribles CheckVar)
-{// can only be direct line from king, excluding knight
-	// itterate through lines from king pos and check if it hits the checking peice, if so then ONLY include those moves
-	// exclude if peice type is knight
-	//
-	// if have time add en passent and castling
-	// gets loc of check peice
+{
 	std::vector<glm::vec2> AvailibleMoves;
 	bool ShouldCheckLoc = true;
 	if (CheckVar.CheckPieceType != "Knight")
@@ -565,4 +560,3 @@ void CreateGame::SwapSide()
 		return;
 	}
 }
-
